@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Events List</title>
+    </h:head>
+    <h:body>
+        <p> <h3 style="color: greenyellow">Events List</h3> </p>
+
+        <hr></hr>
+        <!-- Users list -->
+        <hr></hr>
+        <h:dataTable
+            var="event" 
+            summary="Table of users"
+            value="#{eventManager.allEvents}"
+            rules="all"
+            cellpadding="10">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{event.name}" />
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Status" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{event.openForEnroll}" />
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{event.description}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Start Date" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{event.startDate}" />
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Finish Date" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{event.finishDate}" />
+                </h:form>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Details" />
+                </f:facet>
+                <h:form>
+                    <h:commandLink id="details" action="/faces/administrator/event_details?faces-redirect=true">
+                        <h:outputText value="details" />
+                        <f:setPropertyActionListener target="#{eventManager.currentEvent}" value="#{event}" />
+                    </h:commandLink>  
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Update" />
+                </f:facet>
+                <h:form>
+                    <h:commandLink id="user_update_link" action="/faces/administrator/event_update?faces-redirect=true">
+                        <h:outputText value="Update" />
+                        <f:setPropertyActionListener target="#{eventManager.currentEvent}" value="#{event}" />
+                    </h:commandLink>
+                </h:form>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Remove" />
+                </f:facet>
+                <h:form>
+
+                    <h:commandLink id="remove_link" value="Remove" actionListener="#{eventManager.removeEvent}">
+                        <f:param name="deleteEventId" id="deleteEventId" value="#{event.id}" />
+                    </h:commandLink>
+                </h:form> 
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="updateCategories" />
+                </f:facet>
+                <h:form>
+                    <h:commandLink id="updatecategories" action="/faces/administrator/event_categories_update?faces-redirect=true">
+                        <h:outputText value="Update Categories" />
+                        <f:setPropertyActionListener target="#{eventManager.currentEvent}" value="#{event}" />
+                    </h:commandLink>  
+                </h:form>
+            </h:column>
+            <h:column>
+               <f:facet name="header">
+                   <h:outputText value="Responsables" />
+               </f:facet>
+               <ui:repeat value="#{userManager.getEnrolledManagersInEvents(event.id)}" var="item">
+                   #{item.name}<br/>
+               </ui:repeat>
+           </h:column>
+           <h:column>
+               <f:facet name="header">
+                   <h:outputText value="Event Management" />
+               </f:facet>
+               <h:form>
+                   <h:commandLink id="updatemanagers" action="/faces/administrator/event_managers_update?faces-redirect=true" rendered="#{event.openForEnroll}">
+                       <h:outputText value="Add/Remove Managers" />
+                       <f:setPropertyActionListener target="#{eventManager.currentEvent}" value="#{event}" rendered="#{event.openForEnroll}" />
+                       
+                   </h:commandLink>
+                   <h:outputText value="Event Closed" rendered="#{!event.openForEnroll}"/>
+               </h:form>
+           </h:column>
+        </h:dataTable>
+        <hr></hr>
+
+
+        <h:form>
+            <h:commandButton value="Back" action="/faces/administrtor/administrator_panel?faces-redirect=true" />	
+        </h:form>
+    </h:body>
+</html>
