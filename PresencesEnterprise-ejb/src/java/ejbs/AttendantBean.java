@@ -127,6 +127,7 @@ public class AttendantBean {
         }
     }
     
+    /*
     public void removeAttendant(Long id) throws EntityDoesNotExistsException {
         try {
             Attendant attendant = em.find(Attendant.class, id);
@@ -150,7 +151,7 @@ public class AttendantBean {
             throw new EJBException(e.getMessage());
         }
     }
-    
+    */
     public void enrollAttendantInEvent(Long attendantId, Long eventId) throws EntityDoesNotExistsException, AttendantEnrolledException{
         try {
             System.out.println("ATTENDANTID: " + attendantId);
@@ -241,7 +242,7 @@ public class AttendantBean {
             throw new EJBException(e.getMessage());
         }
     }
-
+/*
     public void enrollAttendantInCategory(Long attendantId, Long categoryId) throws EntityDoesNotExistsException, AttendantEnrolledException{
         try {
             Attendant attendant = em.find(Attendant.class, attendantId);
@@ -308,7 +309,7 @@ public class AttendantBean {
             throw new EJBException(e.getMessage());
         }
     }
-
+*/
     public List<AttendantDTO> getUnrolledAttendantsInCategories(Long id) throws EntityDoesNotExistsException{
         try {
             Category category = em.find(Category.class, id);

@@ -88,8 +88,8 @@ public class ConfigBean {
             
             //atttendants em categories
             //attendantBean.enrollAttendantInEvent(id, currentEvent.getId());
-            attendantBean.enrollAttendantInCategory(Long.parseLong("7"), Long.parseLong("28"));
-            attendantBean.enrollAttendantInCategory(Long.parseLong("7"), Long.parseLong("29"));
+            //attendantBean.enrollAttendantInCategory(Long.parseLong("7"), Long.parseLong("28"));
+            //attendantBean.enrollAttendantInCategory(Long.parseLong("7"), Long.parseLong("29"));
             
  
         } catch (Exception e) {
