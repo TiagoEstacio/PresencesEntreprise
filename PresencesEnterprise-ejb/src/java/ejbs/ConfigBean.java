@@ -47,6 +47,7 @@ public class ConfigBean {
             administratorBean.createUser ("p_09", "119", "Attendant_Name_09", "attendant_email_09@email.com", GROUP.Attendant);
 
             //createEvent (String name,String description, String startDate, String finishDate)
+            //-->Evento deve ter um local??
             eventBean.createEvent("Evento_1","Descricao Evento_1", "01/10/2015 12:00", "01/10/2015 13:00");
             eventBean.createEvent("Evento_2","Descricao Evento_2", "08/10/2015 12:00", "08/10/2015 13:00");
             eventBean.createEvent("Evento_3","Descricao Evento_3", "09/10/2015 12:00", "09/10/2015 13:00");
@@ -61,17 +62,19 @@ public class ConfigBean {
             eventBean.createEvent("Evento_12","Descricao Evento_12", "01/11/2015 14:00", "01/11/2015 18:00");
            
             //createCategory (String name)
-            categoryBean.createEventCategory("Categoria_1");
-            categoryBean.createEventCategory("Categoria_2");
-            categoryBean.createEventCategory("Categoria_3");
-            categoryBean.createEventCategory("Categoria_4");
-            categoryBean.createEventCategory("Categoria_5");
-            categoryBean.createEventCategory("Categoria_6");
-            categoryBean.createEventCategory("Categoria_7");
+            //-->Categoria deve ser tipo para escolher como users? Aula, seminario, workshop,etc
             
-            categoryBean.createAttendantCategory("Categoria_10");
-            categoryBean.createAttendantCategory("Categoria_11");
-            categoryBean.createAttendantCategory("Categoria_12");
+            categoryBean.createEventCategory("Aula-DAE");
+            categoryBean.createEventCategory("Aula-IS");
+            categoryBean.createEventCategory("Seminário - Informática no Ensino Básico");
+            categoryBean.createEventCategory("Seminário - A Saúde do Ensino Superior Politécnico");
+            categoryBean.createEventCategory("Workshop - Software Livre na Pastelaria");
+            categoryBean.createEventCategory("Exame - DAE");
+            categoryBean.createEventCategory("AulaOT - DAE");
+            
+            categoryBean.createAttendantCategory("Engenharia Informática");
+            categoryBean.createAttendantCategory("Informática para a Saúde");
+            categoryBean.createAttendantCategory("Bolos com Chantilly");
            
             
             Long managerID = Long.parseLong("5");
