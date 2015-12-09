@@ -37,15 +37,30 @@ public class CategoryManager {
     }
 
     public String createCategory() {
+        if(currentCategory.getType().toLowerCase().equals("event")){
+            try {
+                categoryBean.createEventCategory(
+                        currentCategory.getName());
+                newCategory.reset();
+                return "/faces/administrator/administrator_panel?faces-redirect=true";
+            } catch (EntityAlreadyExistsException | MyConstraintViolationException e) {
+                FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+            } catch (Exception e) {
+                FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+            }
+        }
+        if(currentCategory.getType().toLowerCase().equals("attendant")){
         try {
-            categoryBean.createEventCategory(
-                    currentCategory.getName());
-            newCategory.reset();
-            return "/faces/administrator/administrator_panel?faces-redirect=true";
-        } catch (EntityAlreadyExistsException | MyConstraintViolationException e) {
-            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
-        } catch (Exception e) {
-            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+                categoryBean.createAttendantCategory(
+                        currentCategory.getName());
+                newCategory.reset();
+                return "/faces/administrator/administrator_panel?faces-redirect=true";
+            } catch (EntityAlreadyExistsException | MyConstraintViolationException e) {
+                FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+            } catch (Exception e) {
+                FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+            }
+        
         }
         return null;
     }

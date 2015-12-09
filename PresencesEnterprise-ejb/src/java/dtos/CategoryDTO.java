@@ -5,6 +5,7 @@ package dtos;
 public class CategoryDTO {
     private Long id;
     private String name;
+    private String type;
     
     public CategoryDTO(){ 
     }
@@ -16,6 +17,14 @@ public class CategoryDTO {
     
     public void reset(){
         this.name = null;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Long getId() {

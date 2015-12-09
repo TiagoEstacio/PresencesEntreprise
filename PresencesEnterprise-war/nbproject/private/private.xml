@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ITWannaBe/Documents/NetBeansProjects/PresencesEnterprise/PresencesEnterprise-war/web/attendant/attendant_events_list.xhtml</file>
-            <file>file:/C:/Users/ITWannaBe/Documents/NetBeansProjects/PresencesEnterprise/PresencesEnterprise-war/web/attendant/attendant_panel.xhtml</file>
-            <file>file:/C:/Users/ITWannaBe/Documents/NetBeansProjects/PresencesEnterprise/PresencesEnterprise-war/src/java/web/UserManager.java</file>
+            <file>file:/D:/IPL/DAE/GitHub/PresencesEntreprise/PresencesEnterprise-war/web/administrator/category_create.xhtml</file>
+            <file>file:/D:/IPL/DAE/GitHub/PresencesEntreprise/PresencesEnterprise-war/src/java/web/CategoryManager.java</file>
         </group>
     </open-files>
 </project-private>
