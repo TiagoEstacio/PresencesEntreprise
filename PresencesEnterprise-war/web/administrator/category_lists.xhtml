@@ -7,15 +7,15 @@
         <title>Category List</title>
     </h:head>
     <h:body>
-        <p> <h3 style="color: greenyellow">Category List</h3> </p>
+        <p> <h3 style="color: greenyellow">Event Category List</h3> </p>
         
         <hr></hr>
         <!-- Users list -->
         <hr></hr>
         <h:dataTable
             var="category" 
-            summary="Table of users"
-            value="#{categoryManager.allCategories}"
+            summary="Table of EventCategories"
+            value="#{categoryManager.allEventCategories}"
             rules="all"
             cellpadding="10">
             <h:column>
@@ -36,16 +36,6 @@
                 </h:form>
             </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Nº Attendants" />
-                </f:facet>
-                <h:form>
-                    
-                    <h:outputText value="#{userManager.getAllAttendantsOfCategory(category.id)}" />
-                    
-                </h:form>
-            </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Nº Events" />
@@ -93,6 +83,75 @@
                 </h:form> 
             </h:column>
         </h:dataTable>
+        
+        <hr></hr>
+        <hr></hr>
+        
+         <p> <h3 style="color: greenyellow">Attendant Category List</h3> </p>
+        
+        <h:dataTable
+            var="category" 
+            summary="Table of AttendantCategories"
+            value="#{categoryManager.allAttendantCategories}"
+            rules="all"
+            cellpadding="10">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ID" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{category.id}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{category.name}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Details" />
+                </f:facet>
+                <h:form>
+                    <h:commandLink id="details" action="/faces/administrator/category_details?faces-redirect=true">
+                        <h:outputText value="details" />
+                        <f:setPropertyActionListener target="#{categoryManager.currentCategory}" value="#{category}" />
+                    </h:commandLink>  
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Update" />
+                </f:facet>
+                <h:form>
+                    <h:commandLink id="category_update_link" action="/faces/administrator/category_update?faces-redirect=true">
+                        <h:outputText value="Update" />
+                        <f:setPropertyActionListener target="#{categoryManager.currentCategory}" value="#{category}" />
+                    </h:commandLink>
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Remove" />
+                </f:facet>
+                
+                <h:form>                 
+                    <h:commandLink id="category_remove_link" value="Remove" actionListener="#{categoryManager.removeCategory}">
+                        <f:param name="deleteCategoryId" id="deleteCategoryId" value="#{category.id}" />
+                    </h:commandLink>
+                </h:form> 
+            </h:column>
+        </h:dataTable>
+        
+        
+        
         <hr></hr>
         <h:form>
             <h:commandButton value="Back" action="/faces/administrator/administrator_panel?faces-redirect=true" />	

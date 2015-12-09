@@ -4,7 +4,7 @@ package ejbs;
 import dtos.AttendantDTO;
 import dtos.EventDTO;
 import dtos.ManagerDTO;
-import entities.Category;
+import entities.EventCategory;
 import entities.Event;
 import entities.Manager;
 import exceptions.AttendantNotEnrolledException;
@@ -119,7 +119,7 @@ public class ManagerBean {
 //            }
 //            
 //            /* caso o manager tenha categories
-//            for (Category category : manager.getCategories()){
+//            for (EventCategory category : manager.getCategories()){
 //                category.removeManager(manager);
 //            }
 //            */
@@ -243,7 +243,7 @@ public class ManagerBean {
                 throw new EntityDoesNotExistsException("There is no manager with that id.");
             }
 
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if (category == null) {
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }
@@ -264,7 +264,7 @@ public class ManagerBean {
     
     public void unrollManagerInCategory(Long managerId, Long categoryId) throws EntityDoesNotExistsException, ManagerNotEnrolledException {
         try {
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if(category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -290,7 +290,7 @@ public class ManagerBean {
     
     public List<ManagerDTO> getEnrolledManagersInCategories(Long Id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, Id);
+            EventCategory category = em.find(EventCategory.class, Id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -305,7 +305,7 @@ public class ManagerBean {
 
     public List<ManagerDTO> getUnrolledManagersInCategories(Long id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, id);
+            EventCategory category = em.find(EventCategory.class, id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -314,7 +314,7 @@ public class ManagerBean {
                     .setParameter("categoryId", category.getId())
                     .getResultList();
             //-----------------------------------------------------------------------------------------
-            List<Manager> enrolled = em.find(Category.class, id).getManagers();
+            List<Manager> enrolled = em.find(EventCategory.class, id).getManagers();
             managers.removeAll(enrolled);
             return managersToDTOs(managers);
         } catch (EntityDoesNotExistsException e) {

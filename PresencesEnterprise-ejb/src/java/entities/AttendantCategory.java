@@ -36,15 +36,8 @@ uniqueConstraints =
         query="SELECT ca FROM AttendantCategory ca ORDER BY ca.id"
     )
 })
-public class AttendantCategory implements Serializable {
+public class AttendantCategory extends Category implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @NotNull
-    private String name;
-    
     @ManyToMany
     @JoinTable(name = "ATTENDANTCATEGORIES_ATTENDANTS",
             joinColumns

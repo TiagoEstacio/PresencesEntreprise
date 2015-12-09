@@ -6,7 +6,9 @@
 package web;
 
 import static com.sun.xml.ws.security.addressing.impl.policy.Constants.logger;
+import dtos.AttendantCategoryDTO;
 import dtos.CategoryDTO;
+import dtos.EventCategoryDTO;
 import dtos.EventDTO;
 import ejbs.CategoryBean;
 import exceptions.EntityAlreadyExistsException;
@@ -23,7 +25,6 @@ import javax.faces.event.ActionEvent;
 @SessionScoped
 public class CategoryManager {
 
-   
     @EJB
     private CategoryBean categoryBean;
 
@@ -37,7 +38,7 @@ public class CategoryManager {
 
     public String createCategory() {
         try {
-            categoryBean.createCategory(
+            categoryBean.createEventCategory(
                     currentCategory.getName());
             newCategory.reset();
             return "/faces/administrator/administrator_panel?faces-redirect=true";
@@ -49,9 +50,18 @@ public class CategoryManager {
         return null;
     }
 
-    public List<CategoryDTO> getAllCategories() {
+    public List<EventCategoryDTO> getAllEventCategories() {
         try {
-            return categoryBean.getAllCategories();
+            return categoryBean.getAllEventCategories();
+        } catch (Exception e) {
+            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+            return null;
+        }
+    }
+    
+    public List<AttendantCategoryDTO> getAllAttendantCategories() {
+        try {
+            return categoryBean.getAllAttendantCategories();
         } catch (Exception e) {
             FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
             return null;
@@ -92,18 +102,19 @@ public class CategoryManager {
         }
         return "/faces/administrator/category_update?faces-redirect=true";
     }
-
-    public void removeCategory(ActionEvent event) {
-        try {
-            UIParameter param = (UIParameter) event.getComponent().findComponent("deleteCategoryId");
-            Long id = Long.parseLong(param.getValue().toString());
-            categoryBean.removeCategory(id);
-        } catch (EntityDoesNotExistsException e) {
-            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
-        } catch (Exception e) {
-            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
-        }
-    }
+    
+     public void removeCategory(ActionEvent event) {
+     try {
+     UIParameter param = (UIParameter) event.getComponent().findComponent("deleteCategoryId");
+     Long id = Long.parseLong(param.getValue().toString());
+     categoryBean.removeCategory(id);
+     } catch (EntityDoesNotExistsException e) {
+     FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+     } catch (Exception e) {
+     FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+     }
+     }
+     
 
     public CategoryDTO getCurrentCategory() {
         return currentCategory;
@@ -112,10 +123,11 @@ public class CategoryManager {
     public void setCurrentCategory(CategoryDTO currentCategory) {
         this.currentCategory = currentCategory;
     }
-    
-    public int getNumberAttendants(Long id) throws EntityDoesNotExistsException {
-        return categoryBean.getNumberofAttendants(id);
-    }
+    /*  
+     public int getNumberAttendants(Long id) throws EntityDoesNotExistsException {
+     return categoryBean.getNumberofAttendants(id);
+     }
+     */
 
     public int getNumberEvents(Long id) throws EntityDoesNotExistsException {
         return categoryBean.getNumberofEvents(id);

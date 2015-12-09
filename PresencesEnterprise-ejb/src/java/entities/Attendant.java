@@ -27,7 +27,7 @@ public class Attendant extends User implements Serializable {
     private List<Event> events;
     
     @ManyToMany(mappedBy = "attendants")
-    private List<Category> categories;
+    private List<AttendantCategory> categories;
     
     public Attendant() {
         this.events = new LinkedList<>();
@@ -49,11 +49,11 @@ public class Attendant extends User implements Serializable {
         this.events = events;
     }
 
-    public List<Category> getCategories() {
+    public List<AttendantCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<AttendantCategory> categories) {
         this.categories = categories;
     }
     
@@ -81,7 +81,7 @@ public class Attendant extends User implements Serializable {
         return this.events.size();
     }
     
-    public void addCategory(Category category){
+    public void addCategory(AttendantCategory category){
         try {
             if (!categories.contains(category)){
                 categories.add(category);
@@ -91,7 +91,7 @@ public class Attendant extends User implements Serializable {
         }
     }
     
-    public void removeCategory(Category category){
+    public void removeCategory(EventCategory category){
         try {
             if (categories.contains(category)){
                 categories.remove(category);

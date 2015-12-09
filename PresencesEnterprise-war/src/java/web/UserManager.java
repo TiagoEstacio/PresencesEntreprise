@@ -382,7 +382,7 @@ public class UserManager {
             return null;
         }
     }
-
+/*
     public int getAllAttendantsOfCategory(long id) {
         try {
 
@@ -393,7 +393,7 @@ public class UserManager {
             return 0;
         }
     }
-
+*/
     public String updateAttendant() {
         try {
             //verificar password
@@ -416,7 +416,7 @@ public class UserManager {
         }
         return "/faces/administrator/attendant_update?faces-redirect=true";
     }
-
+/*
     public void removeAttendant(ActionEvent event) {
         try {
             UIParameter param = (UIParameter) event.getComponent().findComponent("attendantId");
@@ -428,7 +428,7 @@ public class UserManager {
             FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
         }
     }
-
+*/
     public List<EventDTO> getAllEventsOfCurrentAttendant() {
         try {
             return attendantBean.getAllEventsOfAttendant(currentAttendant.getId());
@@ -486,7 +486,7 @@ public class UserManager {
             FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
         }
     }
-
+/*
     public void enrollAttendantInCategory(ActionEvent event) {
         try {
             UIParameter param = (UIParameter) event.getComponent().findComponent("attendantId");
@@ -510,7 +510,7 @@ public class UserManager {
             FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
         }
     }
-
+*/
     public String addCategoriesList() throws EntityDoesNotExistsException, EventEnrolledException {
 
         for (String str : categoriesSelected) {
@@ -592,7 +592,7 @@ public class UserManager {
 //        }
 //        actualizarManagersSelected();
 //    }
-
+/*
     public List<AttendantDTO> getEnrolledAttendantsInCategories() {
         try {
             return attendantBean.getEnrolledAttendantsInCategories(currentCategory.getId());
@@ -603,6 +603,7 @@ public class UserManager {
         }
         return null;
     }
+    */
     /*
      public String updateEventCategories() throws EntityDoesNotExistsException, EventNotEnrolledException, EventEnrolledException {
      for (CategoryDTO cat : eventBean.getAllCategoriesOfEvent(currentEvent.getId())) {

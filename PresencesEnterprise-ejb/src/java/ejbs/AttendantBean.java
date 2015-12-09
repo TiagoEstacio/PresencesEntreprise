@@ -3,7 +3,7 @@ package ejbs;
 
 import dtos.AttendantDTO;
 import dtos.EventDTO;
-import entities.Category;
+import entities.EventCategory;
 import entities.Event;
 import entities.Attendant;
 import exceptions.AttendantEnrolledException;
@@ -139,7 +139,7 @@ public class AttendantBean {
                 event.removeAttendant(attendant);
             }
             
-            for (Category category : attendant.getCategories()){
+            for (EventCategory category : attendant.getCategories()){
                 category.removeAttendant(attendant);
             }
             
@@ -250,7 +250,7 @@ public class AttendantBean {
                 throw new EntityDoesNotExistsException("There is no attendant with that id.");
             }
 
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if (category == null) {
                 throw new EntityDoesNotExistsException("There is no categoty with that id.");
             }
@@ -271,7 +271,7 @@ public class AttendantBean {
     
     public void unrollAttendantInCategory(Long attendantId, Long categoryId) throws EntityDoesNotExistsException, AttendantNotEnrolledException {
         try {
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if(category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -297,7 +297,7 @@ public class AttendantBean {
     
     public List<AttendantDTO> getEnrolledAttendantsInCategories(Long Id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, Id);
+            EventCategory category = em.find(EventCategory.class, Id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -310,9 +310,10 @@ public class AttendantBean {
         }
     }
 */
+    /*
     public List<AttendantDTO> getUnrolledAttendantsInCategories(Long id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, id);
+            EventCategory category = em.find(EventCategory.class, id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -321,7 +322,7 @@ public class AttendantBean {
                     .setParameter("categoryId", category.getId())
                     .getResultList();
             //-----------------------------------------------------------------------------------------
-            List<Attendant> enrolled = em.find(Category.class, id).getAttendants();
+            List<Attendant> enrolled = em.find(EventCategory.class, id).getAttendants();
             attendants.removeAll(enrolled);
             return attendantsToDTOs(attendants);
         } catch (EntityDoesNotExistsException e) {
@@ -330,7 +331,7 @@ public class AttendantBean {
             throw new EJBException(e.getMessage());
         }
     }
-   
+  */ 
     AttendantDTO attendantToDTO(Attendant attendant) {
         return new AttendantDTO(
                 attendant.getId(),

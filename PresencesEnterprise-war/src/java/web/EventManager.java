@@ -8,6 +8,7 @@ package web;
 import static com.sun.xml.ws.security.addressing.impl.policy.Constants.logger;
 import dtos.AttendantDTO;
 import dtos.CategoryDTO;
+import dtos.EventCategoryDTO;
 import dtos.EventDTO;
 import dtos.ManagerDTO;
 import ejbs.AttendantBean;
@@ -213,16 +214,16 @@ public class EventManager {
     }
     ////CATEGORIES////////////////////////////////////////
 
-    public List<CategoryDTO> getAllCategories() {
+    public List<EventCategoryDTO> getAllCategories() {
         try {
-            return categoryBean.getAllCategories();
+            return categoryBean.getAllEventCategories();
         } catch (Exception e) {
             FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
             return null;
         }
     }
 
-    public List<CategoryDTO> getAllCategoriesOfCurrentEvent() {
+    public List<EventCategoryDTO> getAllCategoriesOfCurrentEvent() {
         try {
             return categoryBean.getAllCategoriesOfCurrentEvent(currentEvent.getId());
         } catch (Exception e) {

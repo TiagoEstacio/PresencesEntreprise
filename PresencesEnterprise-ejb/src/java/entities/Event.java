@@ -43,7 +43,7 @@ public class Event implements Serializable {
     private String description;
     
     @ManyToMany(mappedBy = "events")
-    private List<Category> categories;
+    private List<EventCategory> categories;
    
     @NotNull
    @Pattern(regexp="^(?=\\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29"
@@ -127,11 +127,11 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public List<Category> getCategories() {
+    public List<EventCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<EventCategory> categories) {
         this.categories = categories;
     }
 
@@ -167,7 +167,7 @@ public class Event implements Serializable {
         this.attendants = attendants;
     }
     
-    public void addCategory(Category category){
+    public void addCategory(EventCategory category){
         try {
             if (!categories.contains(category)){
                 this.categories.add(category);
@@ -177,7 +177,7 @@ public class Event implements Serializable {
         }
     }
     
-    public void removeCategory(Category category){
+    public void removeCategory(EventCategory category){
         try {
             if (categories.contains(category)){
                 this.categories.remove(category);

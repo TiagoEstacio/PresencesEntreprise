@@ -6,7 +6,7 @@ import dtos.CategoryDTO;
 import dtos.EventDTO;
 import dtos.ManagerDTO;
 import entities.Attendant;
-import entities.Category;
+import entities.EventCategory;
 import entities.Event;
 import entities.Manager;
 import exceptions.EntityAlreadyExistsException;
@@ -231,7 +231,7 @@ public class EventBean {
     
     public List<EventDTO> getCategoryEvents(Long categoryId) throws EntityDoesNotExistsException {
         try {
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if (category == null) {
                 throw new EntityDoesNotExistsException("Category does not exists.");
             }
@@ -250,7 +250,7 @@ public class EventBean {
                 throw new EntityDoesNotExistsException("There is no event with that id.");
             }
 
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if (category == null) {
                 throw new EntityDoesNotExistsException("There is no categoty with that id.");
             }
@@ -271,7 +271,7 @@ public class EventBean {
     
     public void unrollEventInCategory(Long eventId, Long categoryId) throws EntityDoesNotExistsException, EventNotEnrolledException {
         try {
-            Category category = em.find(Category.class, categoryId);
+            EventCategory category = em.find(EventCategory.class, categoryId);
             if(category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -297,7 +297,7 @@ public class EventBean {
     
     public List<EventDTO> getEnrolledEventsInCategories(Long Id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, Id);
+            EventCategory category = em.find(EventCategory.class, Id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
@@ -312,16 +312,16 @@ public class EventBean {
 
     public List<EventDTO> getUnrolledEventsInCategories(Long id) throws EntityDoesNotExistsException{
         try {
-            Category category = em.find(Category.class, id);
+            EventCategory category = em.find(EventCategory.class, id);
             if( category == null){
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }            
             //nao sei se este código está correcto??
-            List<Event> events = (List<Event>) em.createNamedQuery("getAllCategoryEvents")
+            List<Event> events = (List<Event>) em.createNamedQuery("getAllEventCategories")
                     .setParameter("categoryId", category.getId())
                     .getResultList();
             //-----------------------------------------------------------------------------------------
-            List<Event> enrolled = em.find(Category.class, id).getEvents();
+            List<Event> enrolled = em.find(EventCategory.class, id).getEvents();
             events.removeAll(enrolled);
             return eventsToDTOs(events);
         } catch (EntityDoesNotExistsException e) {
@@ -339,7 +339,7 @@ public class EventBean {
                 throw new EntityDoesNotExistsException("There is no event with that id.");
             }
                  
-        List<Category> eventCategories = event.getCategories();
+        List<EventCategory> eventCategories = event.getCategories();
         return categoriesToDTOs(eventCategories);
     }
     
@@ -362,15 +362,15 @@ public class EventBean {
         }
         return dtos;
     }
-    CategoryDTO categoryToDTO(Category category) {
+    CategoryDTO categoryToDTO(EventCategory category) {
         return new CategoryDTO(
                 category.getId(),
                 category.getName());
     }
     
-    List<CategoryDTO> categoriesToDTOs(List<Category> categories) {
+    List<CategoryDTO> categoriesToDTOs(List<EventCategory> categories) {
         List<CategoryDTO> dtos = new ArrayList<>();
-        for (Category c : categories) {
+        for (EventCategory c : categories) {
             dtos.add(categoryToDTO(c));
         }
         return dtos;
