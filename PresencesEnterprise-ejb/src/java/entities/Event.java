@@ -236,7 +236,7 @@ public class Event implements Serializable {
     }
     
     public int getNumberOfAttendants(){
-        return this.attendants.size();
+        return attendants.size();
     }
     
     @Override

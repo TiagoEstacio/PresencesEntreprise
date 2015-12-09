@@ -251,9 +251,6 @@ public class UserManager {
     }
 
     public int getManagerNumberEvents(Long managerId) throws EntityDoesNotExistsException {
-        if (managerBean.getManagerEvents(managerId).isEmpty()) {
-            return 0;
-        }
         return managerBean.getManagerEvents(managerId).size();
     }
 
@@ -312,9 +309,9 @@ public class UserManager {
         }
     }
 
-    public List<ManagerDTO> getEnrolledManagersInEvents() {
+    public List<ManagerDTO> getEnrolledManagersInEvents(Long eventId) {
         try {
-            return managerBean.getEnrolledManagersInEvents(currentEvent.getId());
+            return managerBean.getEnrolledManagersInEvents(eventId);
         } catch (EntityDoesNotExistsException e) {
             FacesExceptionHandler.handleException(e, e.getMessage(), logger);
         } catch (Exception e) {
@@ -438,10 +435,7 @@ public class UserManager {
     }
 
     public int getAttendantNumberEvents(Long attendantId) throws EntityDoesNotExistsException {
-        if (eventBean.getAttendantEvents(attendantId).isEmpty()) {
-            return 0;
-        }
-        return eventBean.getAttendantEvents(attendantId).size();
+        return attendantBean.getAllEventsOfAttendant(attendantId).size();
     }
 
     /*

@@ -356,26 +356,30 @@ public class AttendantBean {
 //    }
     
     //Devolver lista de eventsdto do currentAtendant
-    public List<EventDTO> getAllEventsOfAttendant(Long id) {
-        Attendant att = em.find(Attendant.class, id);
-        
-        if (att != null) {       
-             List<Event> events = new ArrayList<>();
-             events = att.getEvents();
-             return eventsToDTOs(events);
-        }
-        return null;
+    public List<EventDTO> getAllEventsOfAttendant(Long id) throws EntityDoesNotExistsException {
+        try {
+           Attendant attendant = em.find(Attendant.class, id);
+           if (attendant == null) {
+               throw new EntityDoesNotExistsException("Manager does not exists.");
+           }
+           return eventsToDTOs(attendant.getEvents()); 
+       } catch (EntityDoesNotExistsException e) {
+           throw e;
+       } catch (Exception e) {
+           throw new EJBException(e.getMessage());
+       }
     }
     
     
     EventDTO eventToDTO(Event event) {
-        return new EventDTO(
+    EventDTO  eventDTO = new EventDTO(
                 event.getId(),
                 event.getName(),
                 event.getDescription(),
                 event.getStartDate(),
                 event.getFinishDate());
-               
+            eventDTO.setOpenForEnroll(event.isOpenForEnroll());
+            return eventDTO;
     }
     
     List<EventDTO> eventsToDTOs(List<Event> events) {

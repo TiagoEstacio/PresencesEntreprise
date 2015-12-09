@@ -14,18 +14,18 @@
 
             <h:outputLabel for="name" value="Name: " />
             <h:outputText 
-                id="username"
-                value="#{userManager.currentManager.name}"/>
+                id="name"
+                value="#{user.name}"/>
 
             <h:outputLabel for="username" value="Username: " />
             <h:outputText 
-                id="name"
-                value="#{userManager.currentManager.username}"/>
+                id="username"
+                value="#{user.username}"/>
 
             <h:outputLabel for="email" value="Email: " />
             <h:outputText 
                 id="email"
-                value="#{userManager.currentManager.email}"/>
+                value="#{user.email}"/>
 
         </h:panelGrid>
         <br/> 
@@ -77,12 +77,13 @@
                 </f:facet>
                 <h:outputText value="#{event.finishDate}" />
             </h:column>
-
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Number of Attendants" />
-                    <h:outputText value="#{eventManager.getNumberOfAttendants(event.id)}" />
+                    
                 </f:facet>
+                <h:outputText value="#{eventManager.getNumberOfAttendants(event.id)}" />
             </h:column>
             <h:column>
                 <h:form>
