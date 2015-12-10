@@ -220,4 +220,10 @@ public class AdministratorBean {
        }
        return 0;
    }
+
+    public User getUserByUserName(String username) {
+        User user = em.find(User.class, getUserIdByUserName(username));
+        return user;
+    }
+
 }

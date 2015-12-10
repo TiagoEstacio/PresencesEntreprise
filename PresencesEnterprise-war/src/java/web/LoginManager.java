@@ -5,13 +5,21 @@
 */
 package web;
 
+import dtos.UserDTO;
 import ejbs.AdministratorBean;
+import entities.Attendant;
+import entities.Manager;
+import entities.User;
+import static entities.UserGroup.GROUP.Manager;
+import exceptions.EntityDoesNotExistsException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,15 +37,15 @@ public class LoginManager {
     */
    private String username;
    private String password;
+   private UserDTO currentUser;
       
    private boolean loginFlag = true;
    private static final Logger logger = Logger.getLogger("web.LoginManager");
-
+   
    //TESTE
    @EJB
-   private AdministratorBean teste;
-   
-   
+   private AdministratorBean administratorBean;
+      
    public LoginManager() {
    }
 
@@ -75,7 +83,7 @@ public class LoginManager {
         try {           
             System.out.println("USER_TRY_: " +this.username+this.password);
 //            request.login(this.username, this.password); 
-            request.login(teste.getUserIdByUserName(this.username)+"",this.password);         
+            request.login(administratorBean.getUserIdByUserName(this.username)+"",this.password);         
         } catch (ServletException e) {
             logger.log(Level.WARNING, e.getMessage());
             //System.out.println("USER: " +this.username+this.password);
@@ -86,18 +94,36 @@ public class LoginManager {
             return "faces/administrator/administrator_panel?faces-redirect=true";
         }
         if (isUserInRole("Attendant")) {
-            return "faces/attendant/attendant_panel?faces-redirect=true";
+            getCurrentUserFromLogIn();
+            return "faces/attendant/attendant_events_list?faces-redirect=true";
         }
         //O if já não era necessário
         if (isUserInRole("Manager")) {
-            return "faces/manager/manager_panel?faces-redirect=true";
+            getCurrentUserFromLogIn();
+            return "/faces/manager/manager_details?faces-redirect=true";
         }
 
         //!!!!!!!!!!!!
         return "faces/error?faces-redirect=true";
     } 
   
-   public String logout() {
+   
+    public void getCurrentUserFromLogIn(){
+       User user = administratorBean.getUserByUserName(username);
+       currentUser = userToDTO(user);
+    }
+
+    private UserDTO userToDTO(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getUserName(),
+                null,
+                user.getName(),
+                user.getEmail(),
+                user.getGroup().getGroupName());
+    }
+
+    public String logout() {
        FacesContext context = FacesContext.getCurrentInstance();
 
        // remove data from beans:
@@ -141,5 +167,13 @@ public class LoginManager {
    public void setLoginFlag(boolean loginFlag) {
        this.loginFlag = loginFlag;
    }
-   
+
+    public UserDTO getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserDTO currentUser) {
+        this.currentUser = currentUser;
+    }
+ 
 }
