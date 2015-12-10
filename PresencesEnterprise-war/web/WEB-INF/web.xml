@@ -64,7 +64,7 @@
    </security-constraint>
    <login-config>
        <auth-method>FORM</auth-method>
-       <realm-name>presences_management_realm</realm-name>
+       <realm-name>dae_project_realm</realm-name>
        <!-- Nesta versão não precisamos de definir as páginas de login e error porque
     estamos a usar login programático -->
        <!--
