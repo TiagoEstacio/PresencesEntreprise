@@ -13,6 +13,7 @@ import ejbs.AttendantBean;
 import ejbs.CategoryBean;
 import ejbs.EventBean;
 import ejbs.ManagerBean;
+import entities.User;
 import entities.UserGroup;
 import exceptions.AttendantEnrolledException;
 import exceptions.AttendantNotEnrolledException;
@@ -69,6 +70,9 @@ public class UserManager {
     private EventDTO currentEvent;
     private CategoryDTO newCategory;
     private CategoryDTO currentCategory;
+    
+    private String username;
+    private String password;
 
     private UIComponent component;
 
@@ -96,6 +100,126 @@ public class UserManager {
         currentManager = new ManagerDTO();
         currentUser = new UserDTO();
     }
+    
+////////////////////////////////////////////    
+//Retirado do LoginManager//////////////////
+    
+ /**
+    * Verifica se existe algum utilizador autenticado.
+    * @return true se há algum utilizador autenticado e, falso em caso contrário.
+    */
+   public boolean isSomeUserAuthenticated() {
+       return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null;
+   }      
+  
+   /**
+    * Verifica se o utilizador atual pertence a determinado role.
+    * Não é utilizado neste projeto.
+    * @param role a verificar
+    * @return boolean true se o utilizador atual pertencer ao role e false em caso contrário.
+    */    
+   public boolean isUserInRole(String role) {
+       return (isSomeUserAuthenticated() &&
+               FacesContext.getCurrentInstance().getExternalContext().isUserInRole(role));
+   }    
+  
+   public String tratarLoginErrado(){
+       if(isSomeUserAuthenticated()){
+           logout();
+       }
+      
+       // return "index.xhtml?faces-redirect=true"; //Usar esta linha se a página inicial for a página index
+       return "faces/index_login.xhtml?faces-redirect=true"; //Usar esta linha se a página inicial for a página index_login
+   }
+    
+   public String login() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        try {           
+            System.out.println("USER_TRY_: " +this.username+this.password);
+//            request.login(this.username, this.password); 
+            request.login(administratorBean.getUserIdByUserName(this.username)+"",this.password);         
+        } catch (ServletException e) {
+            logger.log(Level.WARNING, e.getMessage());
+            //System.out.println("USER: " +this.username+this.password);
+            return "faces/error?faces-redirect=true";
+        }
+
+        if (isUserInRole("Administrator")) {
+            return "faces/administrator/administrator_panel?faces-redirect=true";
+        }
+        if (isUserInRole("Attendant")) {
+            getCurrentUserFromLogIn();
+            return "faces/attendant/attendant_events_list?faces-redirect=true";
+        }
+        //O if já não era necessário
+        if (isUserInRole("Manager")) {
+            getCurrentUserFromLogIn();
+            return "/faces/manager/manager_details?faces-redirect=true";
+        }
+
+        //!!!!!!!!!!!!
+        return "faces/error?faces-redirect=true";
+    } 
+   
+   //Melhorar para não usar User no UserManager apenas UserDTO
+    public void getCurrentUserFromLogIn(){
+       User user = administratorBean.getUserByUserName(username);
+       currentUser = userToDTO(user);
+    }
+    
+     private UserDTO userToDTO(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getUserName(),
+                null,
+                user.getName(),
+                user.getEmail(),
+                user.getGroup().getGroupName());
+    }
+
+    public String logout() {
+       FacesContext context = FacesContext.getCurrentInstance();
+
+       // remove data from beans:
+       for (String bean : context.getExternalContext().getSessionMap().keySet()) {
+           context.getExternalContext().getSessionMap().remove(bean);
+       }
+
+       // destroy session:
+       HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+       session.invalidate();
+
+       // using faces-redirect to initiate a new request:
+       //return "/index.xhtml?faces-redirect=true"; //Usar esta linha se a página inicial for a página index
+       return "faces/index_login.xhtml?faces-redirect=true"; //Usar esta linha se a página inicial for a página index_login
+   }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isLoginFlag() {
+        return loginFlag;
+    }
+
+    public void setLoginFlag(boolean loginFlag) {
+        this.loginFlag = loginFlag;
+    }
+    
+    //////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////// ADMINISTRATORS ////////////
