@@ -26,33 +26,33 @@ public class AttendantBean {
     @PersistenceContext
     private EntityManager em;
     
-    public void createAttendant (String username, String password, String name, String email) throws EntityAlreadyExistsException, MyConstraintViolationException {
-        try {
-            List<Attendant> attendants = (List<Attendant>) em.createNamedQuery("getAllAttendants").getResultList();
-            for (Attendant a : attendants){
-                if (username.equals(a.getUserName())){
-                    throw new EntityAlreadyExistsException("A attendant with that username already exists.");  
-                }
-            }
-            Attendant attendant = new Attendant (username, password, name, email);
-            em.persist(attendant);
-        } catch (EntityAlreadyExistsException e) {
-            throw e;
-        } catch (ConstraintViolationException e) {
-            throw new MyConstraintViolationException(Utils.getConstraintViolationMessages(e));
-        } catch (Exception e) {
-           throw new EJBException(e.getMessage());
-        }
-    }
-    
-    public List<Attendant> getAll() {
-        try {
-            List<Attendant> attendants = (List<Attendant>) em.createNamedQuery("getAllAttendants").getResultList();
-            return attendants;
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage());
-        }
-    }
+//    public void createAttendant (String username, String password, String name, String email) throws EntityAlreadyExistsException, MyConstraintViolationException {
+//        try {
+//            List<Attendant> attendants = (List<Attendant>) em.createNamedQuery("getAllAttendants").getResultList();
+//            for (Attendant a : attendants){
+//                if (username.equals(a.getUserName())){
+//                    throw new EntityAlreadyExistsException("A attendant with that username already exists.");  
+//                }
+//            }
+//            Attendant attendant = new Attendant (username, password, name, email);
+//            em.persist(attendant);
+//        } catch (EntityAlreadyExistsException e) {
+//            throw e;
+//        } catch (ConstraintViolationException e) {
+//            throw new MyConstraintViolationException(Utils.getConstraintViolationMessages(e));
+//        } catch (Exception e) {
+//           throw new EJBException(e.getMessage());
+//        }
+//    }
+//    
+//    public List<Attendant> getAll() {
+//        try {
+//            List<Attendant> attendants = (List<Attendant>) em.createNamedQuery("getAllAttendants").getResultList();
+//            return attendants;
+//        } catch (Exception e) {
+//            throw new EJBException(e.getMessage());
+//        }
+//    }
     
     public List<AttendantDTO> getAllAttendants() {
         try {

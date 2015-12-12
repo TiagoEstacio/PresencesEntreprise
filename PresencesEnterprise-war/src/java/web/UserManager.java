@@ -472,28 +472,28 @@ public class UserManager {
      */
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////// ATTENDANTS ////////////////
-    public String createAttendandt() throws PasswordValidationException {
-        try {
-            //verificar password
-            if (newAttendant.getPassword().equals(passwordVerify)) {
-                attendantBean.createAttendant(
-                        newAttendant.getUsername(),
-                        newAttendant.getPassword(),
-                        newAttendant.getName(),
-                        newAttendant.getEmail());
-                newAttendant.reset();
-                return "/faces/administrator/attendant_panel?faces-redirect=true";
-            } else {
-                //TODO - NOT WORKING
-                throw new PasswordValidationException("Password not equal to password confirmation.");
-            }
-        } catch (EntityAlreadyExistsException | MyConstraintViolationException e) {
-            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
-        } catch (Exception e) {
-            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
-        }
-        return null;
-    }
+//    public String createAttendandt() throws PasswordValidationException {
+//        try {
+//            //verificar password
+//            if (newAttendant.getPassword().equals(passwordVerify)) {
+//                attendantBean.createAttendant(
+//                        newAttendant.getUsername(),
+//                        newAttendant.getPassword(),
+//                        newAttendant.getName(),
+//                        newAttendant.getEmail());
+//                newAttendant.reset();
+//                return "/faces/administrator/attendant_panel?faces-redirect=true";
+//            } else {
+//                //TODO - NOT WORKING
+//                throw new PasswordValidationException("Password not equal to password confirmation.");
+//            }
+//        } catch (EntityAlreadyExistsException | MyConstraintViolationException e) {
+//            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+//        } catch (Exception e) {
+//            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+//        }
+//        return null;
+//    }
 
     public List<AttendantDTO> getAllAttendants() {
         try {
