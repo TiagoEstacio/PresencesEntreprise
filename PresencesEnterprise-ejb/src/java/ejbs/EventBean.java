@@ -181,7 +181,9 @@ public class EventBean {
     }
     
     public int getEventNumberOfAttendants(Long id) throws EntityDoesNotExistsException {
+        System.out.println("PASSA#1");
         Event event = em.find(Event.class, id);
+        System.out.println("PASSA#2");
             if (event == null){
                 throw new EntityDoesNotExistsException("There is no event with that id.");
             }

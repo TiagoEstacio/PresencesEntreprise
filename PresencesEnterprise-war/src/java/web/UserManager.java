@@ -434,6 +434,7 @@ public class UserManager {
     }
 
     public List<ManagerDTO> getEnrolledManagersInEvents(Long eventId) {
+        System.out.println("event.id capturado: " + eventId);
         try {
             return managerBean.getEnrolledManagersInEvents(eventId);
         } catch (EntityDoesNotExistsException e) {

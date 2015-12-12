@@ -133,12 +133,6 @@ public class EventManager {
     }    
     
     public int getNumberOfAttendants(Long id) throws EntityDoesNotExistsException {
-        System.out.println("EVENT ID: " + id);
-                System.out.println("CURRENT EVENT ID: " + currentEvent.getId());
-
-        
-        System.out.println("NUMBER OF ATTENDANTS: " + eventBean.getEventNumberOfAttendants(id));
-
         return eventBean.getEventNumberOfAttendants(id);
     }
 

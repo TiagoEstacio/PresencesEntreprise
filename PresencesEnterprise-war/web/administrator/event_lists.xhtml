@@ -16,7 +16,7 @@
         <hr></hr>
         <h:dataTable
             var="event" 
-            summary="Table of users"
+            summary="Table of events"
             value="#{eventManager.allEvents}"
             rules="all"
             cellpadding="10">
@@ -112,7 +112,7 @@
             </h:column>
             <h:column>
                <f:facet name="header">
-                   <h:outputText value="Responsables" />
+                   <h:outputText value="Managers" />
                </f:facet>
                 <ui:repeat value="#{userManager.getEnrolledManagersInEvents(event.id)}" var="item">
                    #{item.name}<br/>
@@ -131,6 +131,13 @@
                    <h:outputText value="Event Closed" rendered="#{!event.openForEnroll}"/>
                </h:form>
            </h:column>
+           <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Number of Attendants" />
+                </f:facet>
+                <h:outputText value="#{eventManager.getNumberOfAttendants(event.id)}" />  
+            </h:column>
+            
         </h:dataTable>
         <hr></hr>
 
