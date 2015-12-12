@@ -27,8 +27,6 @@ public class CategoryBean {
     @PersistenceContext
     private EntityManager em;
 
-  
-
     public void createEventCategory(String name) throws EntityAlreadyExistsException, MyConstraintViolationException {
         try {
             List<EventCategory> categories = (List<EventCategory>) em.createNamedQuery("getAllEventCategories").getResultList();
@@ -47,7 +45,7 @@ public class CategoryBean {
             throw new EJBException(e.getMessage());
         }
     }
-    
+
     public void createAttendantCategory(String name) throws EntityAlreadyExistsException, MyConstraintViolationException {
         try {
             List<AttendantCategory> categories = (List<AttendantCategory>) em.createNamedQuery("getAllAttendantCategories").getResultList();
@@ -75,7 +73,7 @@ public class CategoryBean {
             throw new EJBException(ex.getMessage());
         }
     }
-    
+
     public List<AttendantCategoryDTO> getAllAttendantCategories() {
         try {
             List<AttendantCategory> categories = (List<AttendantCategory>) em.createNamedQuery("getAllAttendantCategories").getResultList();
@@ -85,12 +83,12 @@ public class CategoryBean {
         }
     }
 
-    public List<EventCategoryDTO> getAllCategoriesOfCurrentEvent(Long id) throws EntityDoesNotExistsException{
-        
+    public List<EventCategoryDTO> getAllCategoriesOfCurrentEvent(Long id) throws EntityDoesNotExistsException {
+
         Event event = em.find(Event.class, id);
-            if (event == null){
-                throw new EntityDoesNotExistsException("There is no event with that id.");
-            }
+        if (event == null) {
+            throw new EntityDoesNotExistsException("There is no event with that id.");
+        }
         List<EventCategory> eventCategories = event.getCategories();
         return eventCategoriesToDTOs(eventCategories);
     }
@@ -101,9 +99,10 @@ public class CategoryBean {
             throw new EntityDoesNotExistsException("There is no category with that id.");
         }
         return eventsToDTOs(category.getEvents());
-        
+
     }
-/*
+
+    /*
     public int getNumberofAttendants(Long id) throws EntityDoesNotExistsException {
         EventCategory category = em.find(EventCategory.class, id);
         if (category == null) {
@@ -111,13 +110,21 @@ public class CategoryBean {
         }
         return category.getAttendants().size();
     }
-   */ 
+     */
     public int getNumberofEvents(Long id) throws EntityDoesNotExistsException {
         EventCategory category = em.find(EventCategory.class, id);
         if (category == null) {
             throw new EntityDoesNotExistsException("There is no category with that id.");
         }
         return category.getNumberOfEvents();
+    }
+
+    public int getNumberofAttendants(Long id) throws EntityDoesNotExistsException {
+        AttendantCategory category = em.find(AttendantCategory.class, id);
+        if (category == null) {
+            throw new EntityDoesNotExistsException("There is no category with that id.");
+        }
+        return category.getNumberOfAttendants();
     }
 
     public CategoryDTO getCategoryByName(String name) {
@@ -136,8 +143,7 @@ public class CategoryBean {
 
     public void updateCategory(Long id, String name) throws EntityDoesNotExistsException, MyConstraintViolationException {
         try {
-            
-            
+
             EventCategory category = em.find(EventCategory.class, id);
             if (category == null) {
                 throw new EntityDoesNotExistsException("There is no category with that id.");
@@ -153,7 +159,7 @@ public class CategoryBean {
                     throw new EntityAlreadyExistsException("That category already exists.");
                 }
             }
-            */
+             */
             category.setName(name);
             em.merge(category);
         } catch (EntityDoesNotExistsException e) {
@@ -167,11 +173,11 @@ public class CategoryBean {
 
     public void removeCategory(Long id) throws EntityDoesNotExistsException {
         try {
-           Category category = em.find(EventCategory.class, id);
+            Category category = em.find(EventCategory.class, id);
             if (category == null) {
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }
-           /*
+            /*
             for (Attendant attendant : category.getAttendants()) {
                 attendant.removeCategory((EventCategory)category);
                       
@@ -180,7 +186,7 @@ public class CategoryBean {
             for (Event event : category.getEvents()) {
               event.removeCategory(category);
            }
-            */
+             */
             em.remove(category);
         } catch (EntityDoesNotExistsException e) {
             throw e;
@@ -217,7 +223,6 @@ public class CategoryBean {
 //            throw new EJBException(e.getMessage());
 //        }
 //    }
-
     public List<EventCategoryDTO> getEventCategories(Long eventId) throws EntityDoesNotExistsException {
         try {
             Event event = em.find(Event.class, eventId);
@@ -245,7 +250,7 @@ public class CategoryBean {
         }
         return dtos;
     }
-    
+
     AttendantCategoryDTO attendantCategoryToDTO(AttendantCategory category) {
         return new AttendantCategoryDTO(
                 category.getId(),
@@ -259,7 +264,7 @@ public class CategoryBean {
         }
         return dtos;
     }
-    
+
     EventDTO eventToDTO(Event event) {
         return new EventDTO(
                 event.getId(),
@@ -267,9 +272,9 @@ public class CategoryBean {
                 event.getDescription(),
                 event.getStartDate(),
                 event.getFinishDate());
-                
+
     }
-    
+
     List<EventDTO> eventsToDTOs(List<Event> events) {
         List<EventDTO> dtos = new ArrayList<>();
         for (Event e : events) {
@@ -277,4 +282,5 @@ public class CategoryBean {
         }
         return dtos;
     }
+
 }
