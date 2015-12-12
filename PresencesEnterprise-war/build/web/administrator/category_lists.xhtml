@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <p> <h3 style="color: greenyellow">Event Category List</h3> </p>
-        
+
         <hr></hr>
         <!-- Users list -->
         <hr></hr>
@@ -76,19 +76,19 @@
                 </f:facet>
                 <h:form>
 
-                   
+
                     <h:commandLink id="category_remove_link" value="Remove" actionListener="#{categoryManager.removeCategory}">
                         <f:param name="deleteCategoryId" id="deleteCategoryId" value="#{category.id}" />
                     </h:commandLink>
                 </h:form> 
             </h:column>
         </h:dataTable>
-        
+
         <hr></hr>
         <hr></hr>
-        
-         <p> <h3 style="color: greenyellow">Attendant Category List</h3> </p>
-        
+
+        <p> <h3 style="color: greenyellow">Attendant Category List</h3> </p>
+
         <h:dataTable
             var="category" 
             summary="Table of AttendantCategories"
@@ -112,7 +112,14 @@
                     <h:outputText value="#{category.name}" />
                 </h:form>
             </h:column>
-
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Nº Attendants" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{categoryManager.getNumberAttendants(category.id)}" />
+                </h:form>
+            </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Details" />
@@ -141,7 +148,7 @@
                 <f:facet name="header">
                     <h:outputText value="Remove" />
                 </f:facet>
-                
+
                 <h:form>                 
                     <h:commandLink id="category_remove_link" value="Remove" actionListener="#{categoryManager.removeCategory}">
                         <f:param name="deleteCategoryId" id="deleteCategoryId" value="#{category.id}" />
@@ -149,9 +156,9 @@
                 </h:form> 
             </h:column>
         </h:dataTable>
-        
-        
-        
+
+
+
         <hr></hr>
         <h:form>
             <h:commandButton value="Back" action="/faces/administrator/administrator_panel?faces-redirect=true" />	

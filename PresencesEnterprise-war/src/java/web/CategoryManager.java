@@ -37,7 +37,7 @@ public class CategoryManager {
     }
 
     public String createCategory() {
-        if(currentCategory.getType().toLowerCase().equals("event")){
+        if (currentCategory.getType().toLowerCase().equals("event")) {
             try {
                 categoryBean.createEventCategory(
                         currentCategory.getName());
@@ -49,8 +49,8 @@ public class CategoryManager {
                 FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
             }
         }
-        if(currentCategory.getType().toLowerCase().equals("attendant")){
-        try {
+        if (currentCategory.getType().toLowerCase().equals("attendant")) {
+            try {
                 categoryBean.createAttendantCategory(
                         currentCategory.getName());
                 newCategory.reset();
@@ -60,7 +60,7 @@ public class CategoryManager {
             } catch (Exception e) {
                 FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
             }
-        
+
         }
         return null;
     }
@@ -73,7 +73,7 @@ public class CategoryManager {
             return null;
         }
     }
-    
+
     public List<AttendantCategoryDTO> getAllAttendantCategories() {
         try {
             return categoryBean.getAllAttendantCategories();
@@ -91,6 +91,15 @@ public class CategoryManager {
             return null;
         }
     }
+
+    public int getNumberAttendants(Long id) throws EntityDoesNotExistsException {
+        return categoryBean.getNumberofAttendants(id);
+    }
+
+    public int getNumberEvents(Long id) throws EntityDoesNotExistsException {
+        return categoryBean.getNumberofEvents(id);
+    }
+
     /*
      public List<CategoryDTO> getAllCategoriesOfCurrentEvent() {
      try {
@@ -101,7 +110,6 @@ public class CategoryManager {
      }
      }
      */
-
     public String updateCategory() {
 
         try {
@@ -117,19 +125,18 @@ public class CategoryManager {
         }
         return "/faces/administrator/category_update?faces-redirect=true";
     }
-    
-     public void removeCategory(ActionEvent event) {
-     try {
-     UIParameter param = (UIParameter) event.getComponent().findComponent("deleteCategoryId");
-     Long id = Long.parseLong(param.getValue().toString());
-     categoryBean.removeCategory(id);
-     } catch (EntityDoesNotExistsException e) {
-     FacesExceptionHandler.handleException(e, e.getMessage(), logger);
-     } catch (Exception e) {
-     FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
-     }
-     }
-     
+
+    public void removeCategory(ActionEvent event) {
+        try {
+            UIParameter param = (UIParameter) event.getComponent().findComponent("deleteCategoryId");
+            Long id = Long.parseLong(param.getValue().toString());
+            categoryBean.removeCategory(id);
+        } catch (EntityDoesNotExistsException e) {
+            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+        } catch (Exception e) {
+            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+        }
+    }
 
     public CategoryDTO getCurrentCategory() {
         return currentCategory;
@@ -137,15 +144,6 @@ public class CategoryManager {
 
     public void setCurrentCategory(CategoryDTO currentCategory) {
         this.currentCategory = currentCategory;
-    }
-    /*  
-     public int getNumberAttendants(Long id) throws EntityDoesNotExistsException {
-     return categoryBean.getNumberofAttendants(id);
-     }
-     */
-
-    public int getNumberEvents(Long id) throws EntityDoesNotExistsException {
-        return categoryBean.getNumberofEvents(id);
     }
 
 }
