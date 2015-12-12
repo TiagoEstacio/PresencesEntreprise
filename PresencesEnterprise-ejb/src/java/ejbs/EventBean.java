@@ -142,6 +142,16 @@ public class EventBean {
                System.out.println("CURRENTEVENT: "+ currentEvent.isOpenForEnroll());
 
    }
+    public void changePresenceStatus(Long id) throws EntityDoesNotExistsException, MyConstraintViolationException {
+       Event event = em.find(Event.class, id);
+       if (event == null) {
+           throw new EntityDoesNotExistsException("There is no event with that id.");
+       }
+
+       event.setOpenForPresence(!event.isOpenForPresence());
+       eventToDTO(event);
+
+   }
     
 //    public List<EventDTO> getManagerEvents(Long managerId) throws EntityDoesNotExistsException {
 //        try {
@@ -354,6 +364,7 @@ public class EventBean {
                 event.getStartDate(),
                 event.getFinishDate());
             eventDTO.setOpenForEnroll(event.isOpenForEnroll());
+            eventDTO.setOpenForPresence(event.isOpenForPresence());
             return eventDTO;
     }
     

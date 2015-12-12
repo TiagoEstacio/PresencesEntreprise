@@ -10,7 +10,7 @@
 
         <h3 style="color: green">My Details</h3>
         <hr></hr>
-        
+
         <h:panelGrid columns="2">
 
             <h:outputLabel for="name" value="Name: " />
@@ -30,7 +30,7 @@
 
         </h:panelGrid>
         <br/> 
-        
+
         <hr></hr>
 
         <h3 style="color: green">My Events</h3>
@@ -62,7 +62,7 @@
                 <f:facet name="header">
                     <h:outputText value="State" />
                 </f:facet>
-                <h:outputText value="#{event.openForEnroll}" />
+                <h:outputText value="Event Closed" rendered="#{!event.openForEnroll}"/>
             </h:column>
 
             <h:column>
@@ -85,36 +85,49 @@
                 </f:facet>
                 <h:outputText value="#{eventManager.getNumberOfAttendants(event.id)}" /> 
             </h:column>
+
+            <!--<h:column rendered="{event.openForEnroll}">-->
             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Add attendants" />
+                </f:facet>
                 <h:form>
                     <h:commandLink id="details" action="/faces/manager/manager_event_add_attendants?faces-redirect=true">
-                        <h:outputText value="Add atendants" />
+                        <h:outputText value="add" />
                         <f:setPropertyActionListener target="#{userManager.currentEvent}" value="#{event}" />
                     </h:commandLink>
-                </h:form>                
+                </h:form>    
             </h:column> 
-            <h:column>
-               <h:form>
-                   <h:commandLink id="details" action="/faces/manager/manager_event_add_attendants?faces-redirect=true" rendered="#{event.openForEnroll}">
-                       <h:outputText value="Add atendants" />
-                       <f:setPropertyActionListener target="#{userManager.currentEvent}" value="#{event}" />
-                   </h:commandLink>
-               </h:form>
-               <h:outputText value="Event Closed" rendered="#{!event.openForEnroll}"/>
 
-           </h:column> 
-            
+            <!--<h:column rendered="{event.openForEnroll}">-->
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Open for presences" />
+                </f:facet>
+
+                <h:form>
+                    <h:outputText value="close" rendered="#{!event.openForPresence}"/>
+                    <h:commandLink id="details" action="/faces/manager/manager_event_add_attendants?faces-redirect=true" >
+                        <h:outputText value="change state" rendered="#{event.openForPresence}"/>
+                        <f:setPropertyActionListener target="#{userManager.currentEvent}" value="#{event}" />
+                    </h:commandLink>
+                    <h:commandButton value="s" actionListener="#{eventManager.changePresenceStatus(event.id)}"/>
+
+                </h:form>
+
+            </h:column> 
+
         </h:dataTable>
 
         <br/>
         <hr/>
 
 
-                <h:form>
+        <h:form>
             <h:commandLink value="Logout" actionListener="#{userManager.logout}" action="/faces/index_login?faces-redirect=true">
-                       
-                   </h:commandLink>
-       </h:form>
+
+            </h:commandLink>
+        </h:form>
 
         <h:messages errorStyle="color: red" />        
 

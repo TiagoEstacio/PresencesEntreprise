@@ -6,26 +6,27 @@
 package dtos;
 
 public class EventDTO {
-    
+
     private Long id;
     private String name;
     private String description;
     private String startDate;
     private String finishDate;
-    private boolean openForEnroll; 
-    
+    private boolean openForEnroll;
+    private boolean openForPresence;
+
     public EventDTO() {
     }
-    
-    public EventDTO(Long id,String name,String description ,String startDate, String finishDate) {
+
+    public EventDTO(Long id, String name, String description, String startDate, String finishDate) {
         this.id = id;
         this.name = name;
-        this.description=description;
+        this.description = description;
         this.startDate = startDate;
         this.finishDate = finishDate;
     }
-    
-    public void reset(){
+
+    public void reset() {
         this.name = null;
         this.description = null;
         this.openForEnroll = false;
@@ -80,5 +81,13 @@ public class EventDTO {
     public void setId(Long id) {
         this.id = id;
     }
-       
+
+    public boolean isOpenForPresence() {
+        return openForPresence;
+    }
+
+    public void setOpenForPresence(boolean openForPresence) {
+        this.openForPresence = openForPresence;
+    }
+
 }
