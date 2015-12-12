@@ -130,7 +130,10 @@ public class EventManager {
     
     public void changeStatus() throws EntityDoesNotExistsException, MyConstraintViolationException {
        eventBean.changeEventStatus(currentEvent);
-    }    
+    }
+    public void changePresenceStatus(Long id) throws EntityDoesNotExistsException, MyConstraintViolationException {
+       eventBean.changePresenceStatus(id);
+    }
     
     public int getNumberOfAttendants(Long id) throws EntityDoesNotExistsException {
         return eventBean.getEventNumberOfAttendants(id);

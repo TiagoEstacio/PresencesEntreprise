@@ -103,13 +103,13 @@ public class CategoryBean {
     }
 
     /*
-    public int getNumberofAttendants(Long id) throws EntityDoesNotExistsException {
-        EventCategory category = em.find(EventCategory.class, id);
-        if (category == null) {
-            throw new EntityDoesNotExistsException("There is no category with that id.");
-        }
-        return category.getAttendants().size();
-    }
+     public int getNumberofAttendants(Long id) throws EntityDoesNotExistsException {
+     EventCategory category = em.find(EventCategory.class, id);
+     if (category == null) {
+     throw new EntityDoesNotExistsException("There is no category with that id.");
+     }
+     return category.getAttendants().size();
+     }
      */
     public int getNumberofEvents(Long id) throws EntityDoesNotExistsException {
         EventCategory category = em.find(EventCategory.class, id);
@@ -153,12 +153,12 @@ public class CategoryBean {
 
             System.out.println("CategoryID: " + category.getId());
             /*
-            List<Category> categories = (List<Category>) em.createNamedQuery("getAllCategories").getResultList();
-            for (EventCategory c : categories) {
-                if (name.equals(c.getName())) {
-                    throw new EntityAlreadyExistsException("That category already exists.");
-                }
-            }
+             List<Category> categories = (List<Category>) em.createNamedQuery("getAllCategories").getResultList();
+             for (EventCategory c : categories) {
+             if (name.equals(c.getName())) {
+             throw new EntityAlreadyExistsException("That category already exists.");
+             }
+             }
              */
             category.setName(name);
             em.merge(category);
@@ -178,14 +178,14 @@ public class CategoryBean {
                 throw new EntityDoesNotExistsException("There is no category with that id.");
             }
             /*
-            for (Attendant attendant : category.getAttendants()) {
-                attendant.removeCategory((EventCategory)category);
+             for (Attendant attendant : category.getAttendants()) {
+             attendant.removeCategory((EventCategory)category);
                       
-            }
+             }
             
-            for (Event event : category.getEvents()) {
-              event.removeCategory(category);
-           }
+             for (Event event : category.getEvents()) {
+             event.removeCategory(category);
+             }
              */
             em.remove(category);
         } catch (EntityDoesNotExistsException e) {
@@ -266,12 +266,16 @@ public class CategoryBean {
     }
 
     EventDTO eventToDTO(Event event) {
-        return new EventDTO(
+        EventDTO eventDTO = new EventDTO(
                 event.getId(),
                 event.getName(),
                 event.getDescription(),
                 event.getStartDate(),
                 event.getFinishDate());
+        eventDTO.setOpenForEnroll(event.isOpenForEnroll());
+        eventDTO.setOpenForPresence(event.isOpenForPresence());
+
+        return eventDTO;
 
     }
 

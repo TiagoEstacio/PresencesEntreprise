@@ -364,14 +364,16 @@ public class ManagerBean {
     }
     
     EventDTO eventToDTO(Event event) {
-        EventDTO  eventDTO = new EventDTO(
+        EventDTO eventDTO = new EventDTO(
                 event.getId(),
                 event.getName(),
                 event.getDescription(),
                 event.getStartDate(),
                 event.getFinishDate());
-            eventDTO.setOpenForEnroll(event.isOpenForEnroll());
-            return eventDTO;
+        eventDTO.setOpenForEnroll(event.isOpenForEnroll());
+        eventDTO.setOpenForPresence(event.isOpenForPresence());
+
+        return eventDTO;
     }
 
 }

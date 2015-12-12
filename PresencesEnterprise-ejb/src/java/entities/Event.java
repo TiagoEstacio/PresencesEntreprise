@@ -78,6 +78,7 @@ public class Event implements Serializable {
     private List<Attendant> attendants;
     
     private boolean openForEnroll;
+    private boolean openForPresence;
       
     public Event() {
         this.categories = new LinkedList<>();
@@ -253,6 +254,14 @@ public class Event implements Serializable {
 
     public void clearCategories() {
         categories.clear();
+    }
+
+    public boolean isOpenForPresence() {
+        return openForPresence;
+    }
+
+    public void setOpenForPresence(boolean openForPresence) {
+        this.openForPresence = openForPresence;
     }
     
 }
