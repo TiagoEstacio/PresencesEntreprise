@@ -28,7 +28,7 @@ public class UserGroup implements Serializable {
 
   @Id
   @Enumerated(EnumType.STRING)
-  private GROUP groupName;
+  private GROUP group_Name;
   
   @Id
   @OneToOne
@@ -39,16 +39,16 @@ public class UserGroup implements Serializable {
   }
   
   public UserGroup(GROUP group, User user){
-      this.groupName = group;
+      this.group_Name = group;
       this.user = user;
   }
 
   public GROUP getGroupName() {
-      return groupName;
+      return group_Name;
   }
 
   public void setGroupName(GROUP groupName) {
-      this.groupName = groupName;
+      this.group_Name = groupName;
   }
 
   public User getUser() {
@@ -62,7 +62,7 @@ public class UserGroup implements Serializable {
   @Override
   public int hashCode() {
       int hash = 5;
-      hash = 79 * hash + Objects.hashCode(this.groupName);
+      hash = 79 * hash + Objects.hashCode(this.group_Name);
       hash = 79 * hash + Objects.hashCode(this.user);
       return hash;
   }
@@ -76,7 +76,7 @@ public class UserGroup implements Serializable {
           return false;
       }
       final UserGroup other = (UserGroup) obj;
-      if (this.groupName != other.groupName) {
+      if (this.group_Name != other.group_Name) {
           return false;
       }
       if (!Objects.equals(this.user, other.user)) {
@@ -87,7 +87,7 @@ public class UserGroup implements Serializable {
 
   @Override
   public String toString() {
-      return "UserGroup{" + "groupName=" + groupName + ", user=" + user + '}';
+      return "UserGroup{" + "groupName=" + group_Name + ", user=" + user + '}';
   }
     
 }
