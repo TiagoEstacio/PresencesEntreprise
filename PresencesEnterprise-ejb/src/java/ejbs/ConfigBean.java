@@ -108,7 +108,27 @@ public class ConfigBean {
             categoryBean.createAttendantCategory("Informática para a Saúde");
             categoryBean.createAttendantCategory("Bolos com Chantilly");
            
+<<<<<<< HEAD
            
+=======
+            
+            managerBean.enrollManagerInEvent(Long.parseLong("5"), Long.parseLong("20"));
+            managerBean.enrollManagerInEvent(Long.parseLong("6"), Long.parseLong("21"));
+            managerBean.enrollManagerInEvent(Long.parseLong("7"), Long.parseLong("22"));
+            managerBean.enrollManagerInEvent(Long.parseLong("8"), Long.parseLong("21"));
+            managerBean.enrollManagerInEvent(Long.parseLong("6"), Long.parseLong("22"));
+            managerBean.enrollManagerInEvent(Long.parseLong("5"), Long.parseLong("23"));
+            managerBean.enrollManagerInEvent(Long.parseLong("5"), Long.parseLong("24"));
+            
+            //atttendants em events
+            //attendantBean.enrollAttendantInEvent(id, currentEvent.getId());  
+            attendantBean.enrollAttendantInEvent(Long.parseLong("11"), Long.parseLong("23"));
+            attendantBean.enrollAttendantInEvent(Long.parseLong("12"), Long.parseLong("24"));
+            attendantBean.enrollAttendantInEvent(Long.parseLong("14"), Long.parseLong("24"));
+            attendantBean.enrollAttendantInEvent(Long.parseLong("13"), Long.parseLong("24"));
+            attendantBean.enrollAttendantInEvent(Long.parseLong("11"), Long.parseLong("25"));
+
+>>>>>>> ab38fddc4aab47b518efc7721104e12e22ae2404
             eventBean.enrollEventInCategory(Long.parseLong("23"), Long.parseLong("28"));
             eventBean.enrollEventInCategory(Long.parseLong("24"), Long.parseLong("29"));
             eventBean.enrollEventInCategory(Long.parseLong("25"), Long.parseLong("28"));
@@ -117,11 +137,15 @@ public class ConfigBean {
             eventBean.enrollEventInCategory(Long.parseLong("24"),Long.parseLong("29"));
             eventBean.enrollEventInCategory(Long.parseLong("25"),Long.parseLong("28"));
             eventBean.enrollEventInCategory(Long.parseLong("26"),Long.parseLong("28"));
+<<<<<<< HEAD
             
             //atttendants em events
             //attendantBean.enrollAttendantInEvent(id, currentEvent.getId());
 
             
+=======
+          
+>>>>>>> ab38fddc4aab47b518efc7721104e12e22ae2404
             //atttendants em categories
             //attendantBean.enrollAttendantInEvent(id, currentEvent.getId());
             //attendantBean.enrollAttendantInCategory(Long.parseLong("7"), Long.parseLong("28"));
