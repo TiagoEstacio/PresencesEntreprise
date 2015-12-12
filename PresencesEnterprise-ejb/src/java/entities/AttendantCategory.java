@@ -54,7 +54,7 @@ public class AttendantCategory extends Category implements Serializable {
         this.name = name;
         attendants = new LinkedList<>();
     }
-    /*
+  
      public void addAttendant(Attendant attendant){
         try {
             if (!attendants.contains(attendant)){
@@ -74,7 +74,6 @@ public class AttendantCategory extends Category implements Serializable {
             throw new EJBException(ex.getMessage());
         }
     }
-    */
     
     public int getNumberOfAttendants(){
         return this.attendants.size();
