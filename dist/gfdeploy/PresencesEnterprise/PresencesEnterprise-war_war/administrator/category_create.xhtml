@@ -18,7 +18,12 @@
                     required="true" 
                     value="#{categoryManager.currentCategory.name}" />
                 <h:message for="nameInputText" />
-                
+                             
+                <h:selectOneRadio id="radioCategoryType" required="true"
+                                  value="#{categoryManager.currentCategory.type}">
+                    <f:selectItem itemValue="Event" itemLabel="Event" />
+                    <f:selectItem itemValue="Attendant" itemLabel="Attendant" />
+                </h:selectOneRadio>
               
             </h:panelGrid>
             <hr></hr>

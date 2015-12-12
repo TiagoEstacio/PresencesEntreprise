@@ -134,6 +134,8 @@ public class ManagerBean {
 //    }
     
     public void enrollManagerInEvent(Long managerId, Long eventId) throws EntityDoesNotExistsException, ManagerEnrolledException{
+                System.out.println("Eeeeeeeeevent ID: ");
+
         try {
             Manager manager = em.find(Manager.class, managerId);
             if (manager == null) {

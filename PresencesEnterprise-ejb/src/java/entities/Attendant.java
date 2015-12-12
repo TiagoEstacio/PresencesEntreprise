@@ -26,19 +26,19 @@ public class Attendant extends User implements Serializable {
     @ManyToMany(mappedBy = "attendants")
     private List<Event> events;
     
-    @ManyToMany(mappedBy = "attendants")
-    private List<AttendantCategory> categories;
+    //@ManyToMany(mappedBy = "attendants")
+    //private List<AttendantCategory> categories;
     
     public Attendant() {
         this.events = new LinkedList<>();
-        this.categories = new LinkedList<>();
+        //this.categories = new LinkedList<>();
     }
     
     public Attendant(String username, String password, String name, String email) {
         super(username, password, name, email, GROUP.Attendant);
         
         this.events = new LinkedList<>();
-        this.categories = new LinkedList<>();
+        //this.categories = new LinkedList<>();
     }
     
     public List<Event> getEvents() {
@@ -49,13 +49,13 @@ public class Attendant extends User implements Serializable {
         this.events = events;
     }
 
-    public List<AttendantCategory> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<AttendantCategory> categories) {
-        this.categories = categories;
-    }
+//    public List<AttendantCategory> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(List<AttendantCategory> categories) {
+//        this.categories = categories;
+//    }
     
     public void addEvent(Event event){
         try {
@@ -81,29 +81,29 @@ public class Attendant extends User implements Serializable {
         return this.events.size();
     }
     
-    public void addCategory(AttendantCategory category){
-        try {
-            if (!categories.contains(category)){
-                categories.add(category);
-            }
-        } catch (Exception ex) {
-            throw new EJBException(ex.getMessage());
-        }
-    }
-    
-    public void removeCategory(EventCategory category){
-        try {
-            if (categories.contains(category)){
-                categories.remove(category);
-            }
-        } catch (Exception ex) {
-            throw new EJBException(ex.getMessage());
-        }
-    }
-    
-    public int getNumberOfCategories(){
-        return this.categories.size();
-    }
+//    public void addCategory(AttendantCategory category){
+//        try {
+//            if (!categories.contains(category)){
+//                categories.add(category);
+//            }
+//        } catch (Exception ex) {
+//            throw new EJBException(ex.getMessage());
+//        }
+//    }
+//    
+//    public void removeCategory(EventCategory category){
+//        try {
+//            if (categories.contains(category)){
+//                categories.remove(category);
+//            }
+//        } catch (Exception ex) {
+//            throw new EJBException(ex.getMessage());
+//        }
+//    }
+//    
+//    public int getNumberOfCategories(){
+//        return this.categories.size();
+//    }
 
     @Override
     public String toString() {

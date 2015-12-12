@@ -204,19 +204,19 @@ public class CategoryBean {
      }
      }
      */
-    public List<AttendantCategoryDTO> getAttendantCategories(Long attendantId) throws EntityDoesNotExistsException {
-        try {
-            Attendant attendant = em.find(Attendant.class, attendantId);
-            if (attendant == null) {
-                throw new EntityDoesNotExistsException("Attendant does not exists.");
-            }
-            return attendantCategoriesToDTOs(attendant.getCategories());
-        } catch (EntityDoesNotExistsException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new EJBException(e.getMessage());
-        }
-    }
+//    public List<AttendantCategoryDTO> getAttendantCategories(Long attendantId) throws EntityDoesNotExistsException {
+//        try {
+//            Attendant attendant = em.find(Attendant.class, attendantId);
+//            if (attendant == null) {
+//                throw new EntityDoesNotExistsException("Attendant does not exists.");
+//            }
+//            return attendantCategoriesToDTOs(attendant.getCategories());
+//        } catch (EntityDoesNotExistsException e) {
+//            throw e;
+//        } catch (Exception e) {
+//            throw new EJBException(e.getMessage());
+//        }
+//    }
 
     public List<EventCategoryDTO> getEventCategories(Long eventId) throws EntityDoesNotExistsException {
         try {

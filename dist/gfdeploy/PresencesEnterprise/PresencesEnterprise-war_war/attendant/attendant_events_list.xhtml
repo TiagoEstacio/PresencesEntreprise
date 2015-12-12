@@ -15,18 +15,18 @@
 
             <h:outputLabel for="name" value="Name: " />
             <h:outputText 
-                id="username"
-                value="#{userManager.currentAttendant.name}"/>
+                id="name"
+                value="#{userManager.currentUser.name}"/>
 
             <h:outputLabel for="username" value="Username: " />
             <h:outputText 
-                id="name"
-                value="#{userManager.currentAttendant.username}"/>
+                id="username"
+                value="#{userManager.currentUser.username}"/>
 
             <h:outputLabel for="email" value="Email: " />
             <h:outputText 
                 id="email"
-                value="#{userManager.currentAttendant.email}"/>
+                value="#{userManager.currentUser.email}"/>
 
         </h:panelGrid>
         <br/> 
@@ -41,7 +41,10 @@
         <h:dataTable
             var="event" 
             summary="Table of events"
-            value="#{userManager.allEventsOfCurrentAttendant}"
+            value="#{lixo_TODO}"
+            <!--
+            value="{userManager.allEventsOfCurrentAttendant}"
+            -->
             rules="all"
             cellpadding="10">
             <h:column>
@@ -113,9 +116,11 @@
         </h:dataTable>
         <hr></hr>
         
-         <h:form>
-            <h:commandButton value="Back" action="/faces/attendant/attendant_panel?faces-redirect=true" />	
-        </h:form>
+        <h:form>
+           <h:commandLink value="Logout" actionListener="#{userManager.logout}" action="/faces/index_login?faces-redirect=true">
+                       
+                   </h:commandLink>
+       </h:form>
 
         <hr></hr>
 

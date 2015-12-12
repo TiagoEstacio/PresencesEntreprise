@@ -153,8 +153,10 @@ public class AttendantBean {
     }
     */
     public void enrollAttendantInEvent(Long attendantId, Long eventId) throws EntityDoesNotExistsException, AttendantEnrolledException{
+        
+        System.out.println("ATTENDANTID: " + attendantId);
         try {
-            System.out.println("ATTENDANTID: " + attendantId);
+            
             //System.out.println("EVENTID: " + eventId);
             
             Attendant attendant = em.find(Attendant.class, attendantId);

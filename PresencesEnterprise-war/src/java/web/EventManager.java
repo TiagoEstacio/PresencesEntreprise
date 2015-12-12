@@ -187,10 +187,7 @@ public class EventManager {
         eventBean.clearAllAttendantsInEvent(currentEvent.getName());
 
         for (String str : attendantsSelected) {
-            System.err.println("STRINGG: " + str);
-            System.out.println("LALALAL: " + attendantBean.getAttendantByName(str));
-            //System.out.println(currentEvent.getId());
-
+     
             attendantBean.enrollAttendantInEvent((attendantBean.getAttendantByName(str)).getId(), currentEvent.getId());
         }
         actualizarAttendantsSelected();

@@ -15,18 +15,18 @@
 
             <h:outputLabel for="name" value="Name: " />
             <h:outputText 
-                id="username"
-                value="#{userManager.currentManager.name}"/>
+                id="name"
+                value="#{userManager.currentUser.name}"/>
 
             <h:outputLabel for="username" value="Username: " />
             <h:outputText 
-                id="name"
-                value="#{userManager.currentManager.username}"/>
+                id="username"
+                value="#{userManager.currentUser.username}"/>
 
             <h:outputLabel for="email" value="Email: " />
             <h:outputText 
                 id="email"
-                value="#{userManager.currentManager.email}"/>
+                value="#{userManager.currentUser.email}"/>
 
         </h:panelGrid>
         <br/> 
@@ -40,7 +40,10 @@
         <h:dataTable
             var="event"
             summary="List of all manager's events"
-            value="#{userManager.allEventsOfCurrentManager}"
+            value="#{lixo_TODO}"
+            <!--
+            value="{userManager.allEventsOfCurrentAttendant}"
+            -->
             rules="all"
             cellpadding="5">
 
@@ -110,9 +113,11 @@
         <hr/>
 
 
-        <h:form>
-            <h:commandButton value="Back" action="/faces/manager/manager_panel?faces-redirect=true" />	
-        </h:form>
+                <h:form>
+            <h:commandLink value="Logout" actionListener="#{userManager.logout}" action="/faces/index_login?faces-redirect=true">
+                       
+                   </h:commandLink>
+       </h:form>
 
         <h:messages errorStyle="color: red" />        
 

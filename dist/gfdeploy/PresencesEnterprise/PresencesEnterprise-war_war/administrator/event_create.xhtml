@@ -46,7 +46,11 @@
                     p:placeholder="dd/mm/yyyy hh:mm" />
                 <h:message for="finihdateInputText" />
                 
-              
+                <h:selectOneRadio value="#{userManager.setType}">
+                    <f:selectItem itemValue="Event" itemLabel="Event" />
+                    <f:selectItem itemValue="Attendant" itemLabel="Attendant" />
+                </h:selectOneRadio>
+                     
             </h:panelGrid>
             <hr></hr>
             

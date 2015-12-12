@@ -14,20 +14,20 @@
                 página seja logo o form de login). Caso queiramos que apareça
                 primeiro o botão de login, devemos colocar a loginFlag do
                 Utilizador Manager a false-->
-                <h:form rendered="#{!loginManager.loginFlag}">
+                <h:form rendered="#{!userManager.loginFlag}">
                     <h:commandButton
                         value="Login"
-                        actionListener="#{loginManager.prepareLogin}"
+                        actionListener="#{userManager.prepareLogin}"
                         action="index_login?faces-redirect=true" />
                 </h:form>                
  
-                <h:form rendered="#{loginManager.loginFlag}">
+                <h:form rendered="#{userManager.loginFlag}">
                     <h:panelGrid columns="2">                    
                         <h:outputLabel for="usernameInput">Utilizador: </h:outputLabel>
-                        <h:inputText id="usernameInput" value="#{loginManager.username}" required="true" />
+                        <h:inputText id="usernameInput" value="#{userManager.username}" required="true" />
                         <h:outputLabel for="passwordInput">Password: </h:outputLabel>
-                        <h:inputSecret id="passwordInput" value="#{loginManager.password}" required="true" />
-                        <h:commandButton value="Entrar" action="#{loginManager.login}" />
+                        <h:inputSecret id="passwordInput" value="#{userManager.password}" required="true" />
+                        <h:commandButton value="Entrar" action="#{userManager.login}" />
                     </h:panelGrid>                    
                 </h:form>                
     </h:body>
