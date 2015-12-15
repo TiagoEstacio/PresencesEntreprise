@@ -38,31 +38,7 @@ and open the template in the editor.
                     value="#{userManager.currentEvent.finishDate}" />
             </h:panelGrid>
             <hr></hr>
-            <h3 style="color: green">List Categories </h3>
-            <hr></hr>
-            <h:dataTable
-                var="category" 
-                summary="Categories of event"
-                value="#{userManager.getAllCategoriesOfCurrentEvent()}"
-                rules="all"
-                cellpadding="10">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID" />
-                    </f:facet>
-                    <h:form>
-                        <h:outputText value="#{category.id}" />
-                    </h:form>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Name" />
-                    </f:facet>
-                    <h:form>
-                        <h:outputText value="#{category.name}" />
-                    </h:form>
-                </h:column>
-            </h:dataTable>
+            
             <hr></hr>      
             <h:commandButton value="Back" action="/faces/administrator/attendant_events_list?faces-redirect=true"/>
         </h:form>

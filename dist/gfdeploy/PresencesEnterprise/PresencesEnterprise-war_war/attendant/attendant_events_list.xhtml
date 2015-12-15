@@ -91,25 +91,16 @@
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Event open for presence" />
+                    <h:outputText value="Presence" />
                 </f:facet>
                 <h:form>  
-                    <h:outputText value="#{event.openForEnroll}" />    
+                    <h:outputText value="Event Closed" rendered="#{!event.openForPresence}" /> 
+                    Tenho q usar o binding mas ainda n existe estrutura para meter este attendant como participante do evento
+                    <h:selectBooleanCheckbox value="#{userManager.currentAttendant}" rendered="#{event.openForPresence}"> 
+                    </h:selectBooleanCheckbox> 
                 </h:form>
             </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Details" />
-                </f:facet>
-                <h:form>
-                    <h:commandLink id="event_presence_link" action="/faces/attendant/attendant_event_details?faces-redirect=true">
-                        <h:outputText value="details" />
-                        <f:setPropertyActionListener target="#{userManager.currentEvent}" value="#{event}" />
-                    </h:commandLink>  
-                </h:form>
-            </h:column>
-   
         </h:dataTable>
         <hr></hr>
         
