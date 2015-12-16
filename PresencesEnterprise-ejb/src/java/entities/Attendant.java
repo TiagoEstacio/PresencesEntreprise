@@ -34,12 +34,12 @@ public class Attendant extends User implements Serializable {
     private List<Event> events;
 
     @OneToMany
-    private List<AttendantEvent> attendantsInEvent;
+    private List<AttendantEvent> attendantsPresences;
 
     public Attendant() {
         this.events = new LinkedList<>();
         this.categories = new LinkedList<>();
-        this.attendantsInEvent = new LinkedList<>();
+        this.attendantsPresences= new LinkedList<>();
     }
 
     public Attendant(String username, String password, String name, String email) {
@@ -47,7 +47,7 @@ public class Attendant extends User implements Serializable {
 
         this.events = new LinkedList<>();
         this.categories = new LinkedList<>();
-        this.attendantsInEvent = new LinkedList<>();
+        this.attendantsPresences = new LinkedList<>();
 
     }
 
@@ -116,11 +116,11 @@ public class Attendant extends User implements Serializable {
     }
 
     public List<AttendantEvent> getAttendantsInEvent() {
-        return attendantsInEvent;
+        return attendantsPresences;
     }
 
     public void setAttendantsInEvent(List<AttendantEvent> attendantsInEvent) {
-        this.attendantsInEvent = attendantsInEvent;
+        this.attendantsPresences = attendantsInEvent;
     }
     
     

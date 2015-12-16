@@ -275,6 +275,12 @@ public class EventManager {
        actualizarManagersSelected();
        return "event_lists?faces-redirect=true";
    }
+   
+   public void updatePassword() throws EntityDoesNotExistsException {
+       eventBean.updatePassword(currentEvent.getId(), currentEvent.getPassword());
+   }
+   
+   //////////G&S/////////////////
 
     public List<ManagerDTO> getManagersDisponiveisSelected() {
         return managersDisponiveisSelected;

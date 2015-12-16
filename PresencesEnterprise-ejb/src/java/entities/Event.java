@@ -37,6 +37,8 @@ public class Event implements Serializable {
 
     @NotNull
     private String name;
+    
+    private String password;
 
     private String description;
 
@@ -230,17 +232,17 @@ public class Event implements Serializable {
         }
     }
 
-    public void addAttendantPresence(Attendant attendant, boolean presence) {
-        AttendantEvent attEv = new AttendantEvent();
-        attEv.setAttendant(attendant);
-        attEv.setEvent(this);
-        attEv.setAttendantId(attendant.getId());
-        attEv.setEventId(this.getId());
-        attEv.setIsAttending(true);
-
-        attendantsPresences.add(attEv);
-        attendant.getAttendantsInEvent().add(attEv);
-    }
+//    public void addAttendantPresence(Attendant attendant, boolean presence) {
+//        AttendantEvent attEv = new AttendantEvent();
+//        attEv.setAttendant(attendant);
+//        attEv.setEvent(this);
+//        attEv.setAttendantId(attendant.getId());
+//        attEv.setEventId(this.getId());
+//        attEv.setIsAttending(true);
+//
+//        attendantsPresences.add(attEv);
+//        attendant.getAttendantsInEvent().add(attEv);
+//    }
 
     public void removeAttendant(Attendant attendant) {
         try {
@@ -279,6 +281,22 @@ public class Event implements Serializable {
 
     public void setOpenForPresence(boolean openForPresence) {
         this.openForPresence = openForPresence;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<AttendantEvent> getAttendantsPresences() {
+        return attendantsPresences;
+    }
+
+    public void setAttendantsPresences(List<AttendantEvent> attendantsPresences) {
+        this.attendantsPresences = attendantsPresences;
     }
 
 }

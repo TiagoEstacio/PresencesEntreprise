@@ -9,6 +9,7 @@ public class EventDTO {
 
     private Long id;
     private String name;
+    private String password;
     private String description;
     private String startDate;
     private String finishDate;
@@ -32,6 +33,7 @@ public class EventDTO {
         this.openForEnroll = false;
         this.finishDate = null;
         this.startDate = null;
+        this.password = null;
     }
 
     public String getName() {
@@ -90,4 +92,12 @@ public class EventDTO {
         this.openForPresence = openForPresence;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 }

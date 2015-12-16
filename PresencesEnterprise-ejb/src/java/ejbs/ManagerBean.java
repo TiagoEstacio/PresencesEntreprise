@@ -372,6 +372,7 @@ public class ManagerBean {
                 event.getFinishDate());
         eventDTO.setOpenForEnroll(event.isOpenForEnroll());
         eventDTO.setOpenForPresence(event.isOpenForPresence());
+        eventDTO.setPassword(event.getPassword());
 
         return eventDTO;
     }

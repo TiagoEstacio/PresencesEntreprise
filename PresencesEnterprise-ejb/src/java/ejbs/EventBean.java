@@ -355,9 +355,17 @@ public class EventBean {
         return categoriesToDTOs(eventCategories);
     }
     
+    public void updatePassword(Long id, String pass) throws EntityDoesNotExistsException {
+        Event event = em.find(Event.class, id);
+            if (event == null){
+                       
+                throw new EntityDoesNotExistsException("There is no event with that id.");
+            }
+        event.setPassword(pass);
+    }
     
     EventDTO eventToDTO(Event event) {
-        EventDTO  eventDTO = new EventDTO(
+        EventDTO eventDTO = new EventDTO(
                 event.getId(),
                 event.getName(),
                 event.getDescription(),
@@ -365,6 +373,7 @@ public class EventBean {
                 event.getFinishDate());
             eventDTO.setOpenForEnroll(event.isOpenForEnroll());
             eventDTO.setOpenForPresence(event.isOpenForPresence());
+            eventDTO.setPassword(event.getPassword());
             return eventDTO;
     }
     

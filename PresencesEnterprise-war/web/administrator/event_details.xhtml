@@ -21,6 +21,13 @@ and open the template in the editor.
                 <h:outputText
                     value="#{eventManager.currentEvent.name}" />
             </h:panelGrid>
+            <h:panelGrid id="status" columns="2" border="0" cellpadding="0" cellspacing="2">
+                <h:outputLabel  rendered="true" value=" Status:" />
+                <h:outputText
+                    rendered="#{eventManager.currentEvent.openForEnroll}" value = "#{eventManager.currentEvent.name} is open"/>
+                <h:outputText
+                    rendered="#{!eventManager.currentEvent.openForEnroll}" value = "#{eventManager.currentEvent.name} is closed"/>
+            </h:panelGrid>
             <h:panelGrid id="description" columns="2" border="0" cellpadding="0" cellspacing="2">
                 <h:outputLabel  rendered="true" value=" Description:" />
                 <h:outputText
@@ -64,7 +71,17 @@ and open the template in the editor.
                 </h:column>
             </h:dataTable>
             <br />
-            <h:commandButton value="Change Status" actionListener="#{eventManager.changeStatus}" action="/faces/administrator/event_lists?faces-redirect=true"  />
+
+            <br></br>
+
+            <h:commandButton value="Change Status" actionListener="#{eventManager.changeStatus}" action="/faces/administrator/event_details?faces-redirect=true"  />
+            <br></br>
+            <h:form rendered = "#{eventManager.currentEvent.openForEnroll}">
+                <h:outputText value = "Attendants Password: " />
+
+                <h:inputText value = "#{eventManager.currentEvent.password}" />
+                <h:commandButton value="Set Password" action="#{eventManager.updatePassword}"/>
+            </h:form>
             <hr></hr>      
             <h:commandButton value="Back" action="/faces/administrator/event_lists?faces-redirect=true"/>
 
