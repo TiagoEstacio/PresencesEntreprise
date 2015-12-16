@@ -7,6 +7,8 @@ import javax.faces.context.FacesContext;
 
 public class FacesExceptionHandler {
 
+    
+    
     /**
      * Adds a message to the current faces context so that it is shown in the
      * h:messages component of the current page and shows a message in the
