@@ -2,3 +2,8 @@
 /PresencesEnterprise-war/dist/
 /PresencesEnterprise-ejb/src/conf
 /PresencesEnterprise-ejb/setup
+/nbproject/private/
+/build/
+/dist/
+/src/conf/
+/setup/
