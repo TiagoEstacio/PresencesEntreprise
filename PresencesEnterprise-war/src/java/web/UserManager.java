@@ -368,6 +368,14 @@ public class UserManager {
 
     public List<EventDTO> getAllEventsOfCurrentManager() {
         try {
+            return managerBean.getAllEventsOfManager(currentUser.getId());
+        } catch (Exception ex) {
+            throw new EJBException(ex.getMessage());
+        }
+    }
+    
+    public List<EventDTO> getAllEventsOfCurrentManagerManager() {
+        try {
             return managerBean.getAllEventsOfManager(currentManager.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
@@ -565,6 +573,14 @@ public class UserManager {
     public List<EventDTO> getAllEventsOfCurrentAttendant() {
         try {
             return attendantBean.getAllEventsOfAttendant(currentUser.getId());
+        } catch (Exception ex) {
+            throw new EJBException(ex.getMessage());
+        }
+    }
+    
+    public List<EventDTO> getAllEventsOfCurrentAttendantAttendant() {
+        try {
+            return attendantBean.getAllEventsOfAttendant(currentAttendant.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
