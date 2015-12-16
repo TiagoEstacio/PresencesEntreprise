@@ -343,28 +343,28 @@ public class UserManager {
         }
     }
 
-//    public String updateManager() throws PasswordValidationException {
-//        try {
-//            //verificar password
-//            if (currentManager.getPassword().equals(passwordVerify)) {
-//                managerBean.updateManager(
-//                        currentManager.getId(),
-//                        currentManager.getUsername(),
-//                        currentManager.getPassword(),
-//                        currentManager.getName(),
-//                        currentManager.getEmail());
-//                return "/faces/administrator/manager_lists?faces-redirect=true";
-//            } else {
-//                //TODO - NOT WORKING
-//                throw new PasswordValidationException("Password not equal to password confirmation.");
-//            }
-//        } catch (EntityDoesNotExistsException | MyConstraintViolationException e) {
-//            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
-//        } catch (Exception e) {
-//            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
-//        }
-//        return "/faces/administrator/manager_update?faces-redirect=true";
-//    }
+    public String updateManager() throws PasswordValidationException {
+        try {
+            //verificar password
+            if (currentManager.getPassword().equals(passwordVerify)) {
+                managerBean.updateManager(
+                        currentManager.getId(),
+                        currentManager.getUsername(),
+                        currentManager.getPassword(),
+                        currentManager.getName(),
+                        currentManager.getEmail());
+                return "/faces/administrator/admin_manager_lists?faces-redirect=true";
+            } else {
+                //TODO - NOT WORKING
+                throw new PasswordValidationException("Password not equal to password confirmation.");
+            }
+        } catch (EntityDoesNotExistsException | MyConstraintViolationException e) {
+            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+        } catch (Exception e) {
+            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+        }
+        return "/faces/administrator/manager_update?faces-redirect=true";
+    }
 
     public List<EventDTO> getAllEventsOfCurrentManager() {
         try {
@@ -526,7 +526,7 @@ public class UserManager {
                         currentAttendant.getPassword(),
                         currentAttendant.getName(),
                         currentAttendant.getEmail());
-                return "/faces/administrator/attendant_panel?faces-redirect=true";
+                return "/faces/administrator/attendant_lists?faces-redirect=true";
             } else {
                 //TODO - NOT WORKING
                 throw new PasswordValidationException("Password not equal to password confirmation.");
@@ -931,7 +931,6 @@ public class UserManager {
     public void setPasswordVerify(String passwordVerify) {
         this.passwordVerify = passwordVerify;
     }
-
-
-    
+  
 }
+
