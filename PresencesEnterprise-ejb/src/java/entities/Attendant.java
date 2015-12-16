@@ -9,8 +9,10 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -23,11 +25,16 @@ import javax.persistence.NamedQuery;
 })
 public class Attendant extends User implements Serializable {
     
+    /*
     @ManyToMany(mappedBy = "attendants")
     private List<Event> events;
+    */
     
     @ManyToMany(mappedBy = "attendants")
     private List<AttendantCategory> categories;
+    
+    @OneToMany
+    private List<Event> events;
     
     public Attendant() {
         this.events = new LinkedList<>();

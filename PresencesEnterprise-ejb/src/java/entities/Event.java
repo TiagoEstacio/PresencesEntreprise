@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -68,6 +69,7 @@ public class Event implements Serializable {
             = @JoinColumn(name = "MANAGERS_ID", referencedColumnName = "ID"))
     private List<Manager> managers;
     
+    /*
     @ManyToMany
     @JoinTable(name = "EVENTS_ATTENDANTS",
             joinColumns
@@ -75,6 +77,12 @@ public class Event implements Serializable {
             inverseJoinColumns
             = @JoinColumn(name = "ATTENDANTS_ID", referencedColumnName = "ID"))
     private List<Attendant> attendants;
+    */
+    
+    @OneToMany
+    private List<Attendant> attendants;
+
+    
     
     private boolean openForEnroll;
     private boolean openForPresence;
