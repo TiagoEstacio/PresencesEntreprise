@@ -15,17 +15,17 @@
             <h:outputLabel for="name" value="Name: " />
             <h:outputText 
                 id="name"
-                value="#{user.name}"/>
+                value="#{userManager.currentManager.name}"/>
 
             <h:outputLabel for="username" value="Username: " />
             <h:outputText 
                 id="username"
-                value="#{user.username}"/>
+                value="#{userManager.currentManager.username}"/>
 
             <h:outputLabel for="email" value="Email: " />
             <h:outputText 
                 id="email"
-                value="#{user.email}"/>
+                value="#{userManager.currentManager.email}"/>
 
         </h:panelGrid>
         <br/> 
@@ -38,7 +38,7 @@
         
         <h:dataTable
             var="event"
-            summary="List of manager's events"
+            summary="List of manager events"
             value="#{userManager.allEventsOfCurrentManager}"
             rules="all"
             cellpadding="5">
