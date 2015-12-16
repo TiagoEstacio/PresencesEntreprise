@@ -368,7 +368,7 @@ public class UserManager {
 
     public List<EventDTO> getAllEventsOfCurrentManager() {
         try {
-            return managerBean.getAllEventsOfManager(currentUser.getId());
+            return managerBean.getAllEventsOfManager(currentManager.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
@@ -434,7 +434,7 @@ public class UserManager {
     }
 
     public List<ManagerDTO> getEnrolledManagersInEvents(Long eventId) {
-        System.out.println("event.id capturado: " + eventId);
+//        System.out.println("event.id capturado: " + eventId);
         try {
             return managerBean.getEnrolledManagersInEvents(eventId);
         } catch (EntityDoesNotExistsException e) {
@@ -445,6 +445,17 @@ public class UserManager {
         return null;
     }
 
+        public List<AttendantDTO> getEnrolledAttendantsInEvents(Long eventId) {
+//        System.out.println("event.id capturado: " + eventId);
+        try {
+            return attendantBean.getEnrolledAttendantsInEvents(eventId);
+        } catch (EntityDoesNotExistsException e) {
+            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+        } catch (Exception e) {
+            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+        }
+        return null;
+    }
 
     /* Caso manager precise de categories
      public void enrollManagerInCategory(ActionEvent event) {

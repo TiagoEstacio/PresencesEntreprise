@@ -44,12 +44,105 @@ and open the template in the editor.
                 <h:outputText
                     value="#{eventManager.currentEvent.finishDate}" />
             </h:panelGrid>
+            
+            <hr></hr>
+            <h3 style="color: green">List of Managers </h3>
+            <hr></hr>
+        <h:dataTable
+            var="manager" 
+            summary="Table of managers"
+            value="#{userManager.getEnrolledManagersInEvents(eventManager.currentEvent.id)}"
+            rules="all"
+            cellpadding="10">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{manager.name}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Username" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{manager.username}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Email" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{manager.email}" />
+                </h:form>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Number events" />
+                </f:facet>
+                <h:form>  
+                    <h:outputText value="#{userManager.getManagerNumberEvents(manager.id)}" />  
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+            <hr></hr>
+            <h3 style="color: green">List of Attendants </h3>
+            <hr></hr>
+            <h:dataTable
+            var="attendant" 
+            summary="Table of attendants"
+            value="#{userManager.getEnrolledAttendantsInEvents(eventManager.currentEvent.id)}"
+            rules="all"
+            cellpadding="10">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Username" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{attendant.username}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{attendant.name}" />
+                </h:form>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Email" />
+                </f:facet>
+                <h:form>
+                    <h:outputText value="#{attendant.email}" />
+                </h:form>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Number events" />
+                </f:facet>
+                <h:form>  
+                    <h:outputText value="#{userManager.getAttendantNumberEvents(attendant.id)}" />    
+                </h:form>
+            </h:column>
+        </h:dataTable>
+            
             <hr></hr>
             <h3 style="color: green">List Categories </h3>
             <hr></hr>
             <h:dataTable
                 var="category" 
-                summary="Table of categries of event"
+                summary="Table of categories of event"
                 value="#{eventManager.allCategoriesOfCurrentEvent}"
                 rules="all"
                 cellpadding="10">
@@ -73,7 +166,7 @@ and open the template in the editor.
             <br />
 
             <br></br>
-
+<hr></hr>
             <h:commandButton value="Change Status" actionListener="#{eventManager.changeStatus}" action="/faces/administrator/event_details?faces-redirect=true"  />
             <br></br>
             <h:form rendered = "#{eventManager.currentEvent.openForEnroll}">
