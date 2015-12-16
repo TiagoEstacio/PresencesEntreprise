@@ -373,6 +373,14 @@ public class UserManager {
             throw new EJBException(ex.getMessage());
         }
     }
+    
+    public List<EventDTO> getAllEventsOfCurrentManagerManager() {
+        try {
+            return managerBean.getAllEventsOfManager(currentManager.getId());
+        } catch (Exception ex) {
+            throw new EJBException(ex.getMessage());
+        }
+    }
 
     public int getManagerNumberEvents(Long managerId) throws EntityDoesNotExistsException {
         return managerBean.getManagerEvents(managerId).size();
@@ -434,7 +442,7 @@ public class UserManager {
     }
 
     public List<ManagerDTO> getEnrolledManagersInEvents(Long eventId) {
-        System.out.println("event.id capturado: " + eventId);
+//        System.out.println("event.id capturado: " + eventId);
         try {
             return managerBean.getEnrolledManagersInEvents(eventId);
         } catch (EntityDoesNotExistsException e) {
@@ -445,6 +453,17 @@ public class UserManager {
         return null;
     }
 
+        public List<AttendantDTO> getEnrolledAttendantsInEvents(Long eventId) {
+//        System.out.println("event.id capturado: " + eventId);
+        try {
+            return attendantBean.getEnrolledAttendantsInEvents(eventId);
+        } catch (EntityDoesNotExistsException e) {
+            FacesExceptionHandler.handleException(e, e.getMessage(), logger);
+        } catch (Exception e) {
+            FacesExceptionHandler.handleException(e, "Unexpected error! Try again latter!", logger);
+        }
+        return null;
+    }
 
     /* Caso manager precise de categories
      public void enrollManagerInCategory(ActionEvent event) {
@@ -554,6 +573,14 @@ public class UserManager {
     public List<EventDTO> getAllEventsOfCurrentAttendant() {
         try {
             return attendantBean.getAllEventsOfAttendant(currentUser.getId());
+        } catch (Exception ex) {
+            throw new EJBException(ex.getMessage());
+        }
+    }
+    
+    public List<EventDTO> getAllEventsOfCurrentAttendantAttendant() {
+        try {
+            return attendantBean.getAllEventsOfAttendant(currentAttendant.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }

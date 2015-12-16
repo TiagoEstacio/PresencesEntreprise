@@ -235,11 +235,6 @@ public class Event implements Serializable {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-     public void addPresenca(Attendant attendant) {
-         System.out.println("Attendant a adicionar: " + attendant.toString());
-         presentes.add(attendant);
-    }
 
 //    public void addAttendantPresence(Attendant attendant, boolean presence) {
 //        AttendantEvent attEv = new AttendantEvent();
@@ -307,6 +302,9 @@ public class Event implements Serializable {
         this.attendantsPresences = attendantsPresences;
     }
     
+    public void addPresenca(Attendant attendant) {
+        presentes.add(attendant);
+    }
 
     public List<Attendant> getPresentes() {
         return presentes;
