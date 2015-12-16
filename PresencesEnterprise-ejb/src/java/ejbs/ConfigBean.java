@@ -51,7 +51,7 @@ public class ConfigBean {
             administratorBean.createUser ("m_04", "14", "Manager_Name_04", "manager_email_04@email.com", GROUP.Manager);
             administratorBean.createUser ("m_05", "16", "Manager_Name_05", "manager_email_05@email.com", GROUP.Manager);
             administratorBean.createUser ("m_06", "17", "Manager_Name_06", "manager_email_06@email.com", GROUP.Manager);
-            administratorBean.createUser ("p_01", "111", "Attendant_Name_01", "attendant_email_01@email.com", GROUP.Attendant);
+            administratorBean.createUser ("11", "111", "11", "attendant_email_01@email.com", GROUP.Attendant);
             administratorBean.createUser ("p_02", "112", "Attendant_Name_02", "attendant_email_02@email.com", GROUP.Attendant);
             administratorBean.createUser ("p_03", "113", "Attendant_Name_03", "attendant_email_03@email.com", GROUP.Attendant);
             administratorBean.createUser ("p_04", "114", "Attendant_Name_04", "attendant_email_04@email.com", GROUP.Attendant);

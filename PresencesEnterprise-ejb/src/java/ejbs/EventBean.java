@@ -16,6 +16,7 @@ import exceptions.MyConstraintViolationException;
 import exceptions.Utils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -166,6 +167,7 @@ public class EventBean {
 //            throw new EJBException(e.getMessage());
 //        }
 //    }
+     @RolesAllowed({"Attendant"})
     public List<EventDTO> getAttendantEvents(Long attendantId) throws EntityDoesNotExistsException {
         try {
             Attendant attendant = em.find(Attendant.class, attendantId);
@@ -361,6 +363,7 @@ public class EventBean {
         }
         event.setPassword(pass);
     }
+
 
     public void adicionarAttendant(Long eventId, Long attendantId) throws EntityDoesNotExistsException {
         Event event = em.find(Event.class, eventId);
