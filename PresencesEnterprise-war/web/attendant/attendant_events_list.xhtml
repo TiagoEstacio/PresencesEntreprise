@@ -95,8 +95,8 @@
                 </f:facet>
                 <h:form>  
                     <h:outputText value="Event Closed" rendered="#{!event.openForPresence}" /> 
-                    Tenho q usar o binding mas ainda n existe estrutura para meter este attendant como participante do evento
-                    <h:selectBooleanCheckbox value="#{userManager.currentAttendant}" rendered="#{event.openForPresence}"> 
+                    
+                    <h:selectBooleanCheckbox value="#{userManager.attendantPresente()}" rendered="#{event.openForPresence}"> 
                     </h:selectBooleanCheckbox> 
                 </h:form>
             </h:column>

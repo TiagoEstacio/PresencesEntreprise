@@ -37,7 +37,7 @@ public class Event implements Serializable {
 
     @NotNull
     private String name;
-    
+
     private String password;
 
     private String description;
@@ -83,11 +83,15 @@ public class Event implements Serializable {
     private boolean openForEnroll;
     private boolean openForPresence;
 
+    //Solucao provisória de inscrição de attendants no evento
+    private List<Attendant> presentes;
+
     public Event() {
         this.categories = new LinkedList<>();
         this.managers = new LinkedList<>();
         this.attendants = new LinkedList<>();
         this.attendantsPresences = new LinkedList<>();
+        this.presentes = new LinkedList<>();
     }
 
     public Event(String name, String description, String startDate, String finishDate) {
@@ -99,7 +103,7 @@ public class Event implements Serializable {
         this.managers = new LinkedList<>();
         this.attendants = new LinkedList<>();
         this.attendantsPresences = new LinkedList<>();
-
+        this.presentes = new LinkedList<>();
     }
 
     public boolean isOpenForEnroll() {
@@ -243,7 +247,6 @@ public class Event implements Serializable {
 //        attendantsPresences.add(attEv);
 //        attendant.getAttendantsInEvent().add(attEv);
 //    }
-
     public void removeAttendant(Attendant attendant) {
         try {
             if (attendants.contains(attendant)) {
@@ -298,5 +301,18 @@ public class Event implements Serializable {
     public void setAttendantsPresences(List<AttendantEvent> attendantsPresences) {
         this.attendantsPresences = attendantsPresences;
     }
+    
+    public void addPresenca(Attendant attendant) {
+        presentes.add(attendant);
+    }
 
+    public List<Attendant> getPresentes() {
+        return presentes;
+    }
+
+    public void setPresentes(LinkedList<Attendant> presentes) {
+        this.presentes = presentes;
+    }
+    
+    
 }

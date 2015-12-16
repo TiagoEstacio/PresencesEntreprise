@@ -682,6 +682,10 @@ public class UserManager {
 
         }
     }
+    
+    public void attendantPresente() throws EntityDoesNotExistsException {
+        eventBean.adicionarAttendant(currentEvent.getId(), currentAttendant.getId());
+    }
 
 //    public void actualizarManagersSelected() {
 //
