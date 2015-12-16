@@ -19,48 +19,46 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-
-
 @Entity
 @Table(name = "EVENTS",
-uniqueConstraints =
-@UniqueConstraint(columnNames = {"NAME"}))
+        uniqueConstraints
+        = @UniqueConstraint(columnNames = {"NAME"}))
 @NamedQueries({
     @NamedQuery(
-        name="getAllEvents",
-        query="SELECT ev FROM Event ev ORDER BY ev.id"
+            name = "getAllEvents",
+            query = "SELECT ev FROM Event ev ORDER BY ev.id"
     )
 })
 public class Event implements Serializable {
-   
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
     private String name;
-    
+
     private String description;
-    
+
     @ManyToMany(mappedBy = "events")
     private List<EventCategory> categories;
-   
+
     @NotNull
-   @Pattern(regexp="^(?=\\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29"
-           + "(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]"
-           + "|[3579][26])00)))(?:\\x20|$))|(?:2[0-8]|1\\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\\1"
-           + "(?:1[6-9]|[2-9]\\d)?\\d\\d(?:(?=\\x20\\d)\\x20|$))(|([01]\\d|2[0-3])(:[0-5]\\d){1,2})?$",
-            message="{Not Valid date or hour}")
+    @Pattern(regexp = "^(?=\\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29"
+            + "(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]"
+            + "|[3579][26])00)))(?:\\x20|$))|(?:2[0-8]|1\\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\\1"
+            + "(?:1[6-9]|[2-9]\\d)?\\d\\d(?:(?=\\x20\\d)\\x20|$))(|([01]\\d|2[0-3])(:[0-5]\\d){1,2})?$",
+            message = "{Not Valid date or hour}")
     private String startDate;
-    
+
     @NotNull
-    @Pattern(regexp="^(?=\\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29"
-           + "(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]"
-           + "|[3579][26])00)))(?:\\x20|$))|(?:2[0-8]|1\\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\\1"
-           + "(?:1[6-9]|[2-9]\\d)?\\d\\d(?:(?=\\x20\\d)\\x20|$))(|([01]\\d|2[0-3])(:[0-5]\\d){1,2})?$",
-            message="{Not Valid date or hour}")
-        private String finishDate;
-    
+    @Pattern(regexp = "^(?=\\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29"
+            + "(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]"
+            + "|[3579][26])00)))(?:\\x20|$))|(?:2[0-8]|1\\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\\1"
+            + "(?:1[6-9]|[2-9]\\d)?\\d\\d(?:(?=\\x20\\d)\\x20|$))(|([01]\\d|2[0-3])(:[0-5]\\d){1,2})?$",
+            message = "{Not Valid date or hour}")
+    private String finishDate;
+
     @ManyToMany
     @JoinTable(name = "EVENTS_MANAGERS",
             joinColumns
@@ -68,8 +66,7 @@ public class Event implements Serializable {
             inverseJoinColumns
             = @JoinColumn(name = "MANAGERS_ID", referencedColumnName = "ID"))
     private List<Manager> managers;
-    
-    /*
+
     @ManyToMany
     @JoinTable(name = "EVENTS_ATTENDANTS",
             joinColumns
@@ -77,30 +74,30 @@ public class Event implements Serializable {
             inverseJoinColumns
             = @JoinColumn(name = "ATTENDANTS_ID", referencedColumnName = "ID"))
     private List<Attendant> attendants;
-    */
-    
-    @OneToMany
-    private List<Attendant> attendants;
 
-    
-    
+    @OneToMany
+    private List<AttendantEvent> attendantsPresences;
+
     private boolean openForEnroll;
     private boolean openForPresence;
-      
+
     public Event() {
         this.categories = new LinkedList<>();
         this.managers = new LinkedList<>();
         this.attendants = new LinkedList<>();
+        this.attendantsPresences = new LinkedList<>();
     }
 
-    public Event(String name,String description ,String startDate, String finishDate) {
+    public Event(String name, String description, String startDate, String finishDate) {
         this.name = name;
-        this.description=description;
+        this.description = description;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.categories = new LinkedList<>();
         this.managers = new LinkedList<>();
         this.attendants = new LinkedList<>();
+        this.attendantsPresences = new LinkedList<>();
+
     }
 
     public boolean isOpenForEnroll() {
@@ -174,87 +171,100 @@ public class Event implements Serializable {
     public void setAttendants(List<Attendant> attendants) {
         this.attendants = attendants;
     }
-    
-    public void addCategory(EventCategory category){
+
+    public void addCategory(EventCategory category) {
         try {
-            if (!categories.contains(category)){
+            if (!categories.contains(category)) {
                 this.categories.add(category);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public void removeCategory(EventCategory category){
+
+    public void removeCategory(EventCategory category) {
         try {
-            if (categories.contains(category)){
+            if (categories.contains(category)) {
                 this.categories.remove(category);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public int getNumberOfCategories(){
+
+    public int getNumberOfCategories() {
         return this.categories.size();
     }
-    
-    public void addManager(Manager manager){
+
+    public void addManager(Manager manager) {
         try {
-            if (!managers.contains(manager)){
+            if (!managers.contains(manager)) {
                 managers.add(manager);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public void removeManager(Manager manager){
+
+    public void removeManager(Manager manager) {
         try {
-            if (managers.contains(manager)){
+            if (managers.contains(manager)) {
                 managers.remove(manager);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public int getNumberOfManagers(){
+
+    public int getNumberOfManagers() {
         return this.managers.size();
     }
 
-    public void addAttendant(Attendant attendant){
+    public void addAttendant(Attendant attendant) {
         try {
-            if (!attendants.contains(attendant)){
+            if (!attendants.contains(attendant)) {
                 attendants.add(attendant);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public void removeAttendant(Attendant attendant){
+
+    public void addAttendantPresence(Attendant attendant, boolean presence) {
+        AttendantEvent attEv = new AttendantEvent();
+        attEv.setAttendant(attendant);
+        attEv.setEvent(this);
+        attEv.setAttendantId(attendant.getId());
+        attEv.setEventId(this.getId());
+        attEv.setIsAttending(true);
+
+        attendantsPresences.add(attEv);
+        attendant.getAttendantsInEvent().add(attEv);
+    }
+
+    public void removeAttendant(Attendant attendant) {
         try {
-            if (attendants.contains(attendant)){
+            if (attendants.contains(attendant)) {
                 attendants.remove(attendant);
             }
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }
-    
-    public int getNumberOfAttendants(){
+
+    public int getNumberOfAttendants() {
         return attendants.size();
     }
-    
+
     @Override
     public String toString() {
-        return "entities.Event[id=" + id + "]: "+ name;
+        return "entities.Event[id=" + id + "]: " + name;
     }
 
     public void clearAttendants() {
         attendants.clear();
     }
+
     public void clearManagers() {
         managers.clear();
     }
@@ -270,5 +280,5 @@ public class Event implements Serializable {
     public void setOpenForPresence(boolean openForPresence) {
         this.openForPresence = openForPresence;
     }
-    
+
 }

@@ -117,7 +117,7 @@ public class ConfigBean {
             attendantBean.enrollAttendantInCategory(Long.parseLong("11"), Long.parseLong("40"));
             attendantBean.enrollAttendantInCategory(Long.parseLong("11"), Long.parseLong("39"));
             
- 
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

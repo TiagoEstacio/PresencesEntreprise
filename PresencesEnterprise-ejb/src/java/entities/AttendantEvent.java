@@ -43,5 +43,46 @@ public class AttendantEvent implements Serializable {
     public String toString() {
         return "entities.AttendantEvent";
     }
+
+    public Long getAttendantId() {
+        return attendantId;
+    }
+
+    public void setAttendantId(Long attendantId) {
+        this.attendantId = attendantId;
+    }
+
+    public boolean isIsAttending() {
+        return isAttending;
+    }
+
+    public void setIsAttending(boolean isAttending) {
+        this.isAttending = isAttending;
+    }
+
+    public Attendant getAttendant() {
+        return attendant;
+    }
+
+    public void setAttendant(Attendant attendant) {
+        this.attendant = attendant;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+    
     
 }

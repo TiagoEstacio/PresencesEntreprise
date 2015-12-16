@@ -61,7 +61,7 @@ public abstract class User implements Serializable {
   
     
     @NotNull
-      @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
    protected UserGroup group;
    
     
