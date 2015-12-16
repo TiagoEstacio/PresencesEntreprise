@@ -365,18 +365,10 @@ public class UserManager {
         }
         return "/faces/administrator/manager_update?faces-redirect=true";
     }
-    
-//    public List<EventDTO> getAllEventsOfCurrentManager() {
-//        try {
-//            return managerBean.getAllEventsOfManager(currentUser.getId());
-//        } catch (Exception ex) {
-//            throw new EJBException(ex.getMessage());
-//        }
-//    }
-    
-        public List<EventDTO> getAllEventsOfCurrentManager() {
+
+    public List<EventDTO> getAllEventsOfCurrentManager() {
         try {
-            return managerBean.getAllEventsOfManager(currentManager.getId());
+            return managerBean.getAllEventsOfManager(currentUser.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
@@ -561,7 +553,7 @@ public class UserManager {
 */
     public List<EventDTO> getAllEventsOfCurrentAttendant() {
         try {
-            return attendantBean.getAllEventsOfAttendant(currentAttendant.getId());
+            return attendantBean.getAllEventsOfAttendant(currentUser.getId());
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
@@ -689,6 +681,10 @@ public class UserManager {
             }
 
         }
+    }
+    
+    public void attendantPresente() throws EntityDoesNotExistsException {
+        eventBean.adicionarAttendant(currentEvent.getId(), currentAttendant.getId());
     }
 
 //    public void actualizarManagersSelected() {
@@ -935,7 +931,6 @@ public class UserManager {
     public void setPasswordVerify(String passwordVerify) {
         this.passwordVerify = passwordVerify;
     }
-
-
-    
+  
 }
+
