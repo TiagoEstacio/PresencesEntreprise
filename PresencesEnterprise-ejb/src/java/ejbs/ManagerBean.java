@@ -81,31 +81,31 @@ public class ManagerBean {
         return null;
     }
 
-//    public void updateManager (Long id, String username, String password, String name, String email)throws EntityDoesNotExistsException, MyConstraintViolationException{
-//        try {
-//            Manager manager = em.find(Manager.class, id);
-//            if (manager == null){
-//                throw new EntityDoesNotExistsException("There is no manager with that id.");
+    public void updateManager (Long id, String username, String password, String name, String email)throws EntityDoesNotExistsException, MyConstraintViolationException{
+        try {
+            Manager manager = em.find(Manager.class, id);
+            if (manager == null){
+                throw new EntityDoesNotExistsException("There is no manager with that id.");
+            }
+//            List<Manager> Managers = (List<Manager>) em.createNamedQuery("getAllManagers").getResultList();
+//            for (Manager m : Managers){
+//                if (username.equals(m.getUserName())){
+//                    throw new EntityAlreadyExistsException("That manager already exists.");
+//                }
 //            }
-////            List<Manager> Managers = (List<Manager>) em.createNamedQuery("getAllManagers").getResultList();
-////            for (Manager m : Managers){
-////                if (username.equals(m.getUserName())){
-////                    throw new EntityAlreadyExistsException("That manager already exists.");
-////                }
-////            }
-//            manager.setUsername(username);
-//            manager.setPassword(password);
-//            manager.setName(name);
-//            manager.setEmail(email);
-//            em.merge(manager);   
-//        } catch (EntityDoesNotExistsException e) {
-//            throw e;
-//        } catch (ConstraintViolationException e) {
-//            throw new MyConstraintViolationException(Utils.getConstraintViolationMessages(e));            
-//        } catch (Exception e) {
-//            throw new EJBException(e.getMessage());
-//        }
-//    }
+            manager.setUsername(username);
+            manager.setPassword(password);
+            manager.setName(name);
+            manager.setEmail(email);
+            em.merge(manager);   
+        } catch (EntityDoesNotExistsException e) {
+            throw e;
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(Utils.getConstraintViolationMessages(e));            
+        } catch (Exception e) {
+            throw new EJBException(e.getMessage());
+        }
+    }
     
 //    public void removeManager(Long id) throws EntityDoesNotExistsException {
 //        try {
