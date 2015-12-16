@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /build
 /dist
 /nbproject
@@ -17,3 +18,18 @@
 /WSJerseyClientPresences/dist/
 /WSJerseyClientPresences/nbproject/private/
 /PresencesEnterprise_RESTWS/dist/
+=======
+/build/
+/dist/
+/nbproject/
+/build.xml
+/PresencesEnterprise-ejb/build/
+/PresencesEnterprise-ejb/dist/
+/PresencesEnterprise-ejb/nbproject/
+/PresencesEnterprise-ejb/setup/
+/PresencesEnterprise-ejb/build.xml
+/PresencesEnterprise-war/build/
+/PresencesEnterprise-war/dist/
+/PresencesEnterprise-war/nbproject/
+/PresencesEnterprise-war/build.xml
+>>>>>>> 4f7e03f2978a626978e3162e501030bea230399e
